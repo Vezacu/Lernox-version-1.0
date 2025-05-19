@@ -6,7 +6,7 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import * as Clerk from "@clerk/elements/common";
 import * as SignIn from "@clerk/elements/sign-in";
-import '../homepage/Landingpage.css';
+import '../styles/Landingpage.css';
 
 const HomePage = () => {
   const { isLoaded, isSignedIn, user } = useUser();

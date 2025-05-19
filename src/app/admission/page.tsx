@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import { CldUploadWidget } from "next-cloudinary";
 import Link from "next/link";
 import DarkModeToggle from "@/components/darkmode/darkmode";
-import '../homepage/Landingpage.css';
+import '../styles/Landingpage.css';
 
 // Define the admission schema
 const admissionSchema = z.object({
