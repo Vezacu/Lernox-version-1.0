@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import './LandingPage.css'; // Import the CSS file
+import '@/app/styles/Landingpage.css'; // Import the CSS file
 import Image from 'next/image';
 
 const LandingPage: React.FC = () => {

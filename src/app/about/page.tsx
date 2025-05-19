@@ -4,6 +4,7 @@ import './aboutpage.css';
 import Image from 'next/image';
 import '../homepage/Landingpage.css';
 import '../styles/Landingpage.css';
+import '@/app/styles/Landingpage.css';
 import DarkModeToggle from '@/components/darkmode/darkmode';
 import Link from 'next/link';
 

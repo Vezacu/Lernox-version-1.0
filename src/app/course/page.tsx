@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import './course.css';  // Importing CSS file
 import Image from 'next/image';
+import '@/app/styles/Landingpage.css';
 import '../homepage/Landingpage.css';
 import '../styles/Landingpage.css';
 import Link from 'next/link';
