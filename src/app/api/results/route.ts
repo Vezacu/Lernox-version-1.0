@@ -1,6 +1,24 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
+import { z } from 'zod';
 
+// Schema for validating result creation/update
+const resultSchema = z.object({
+  studentId: z.number(),
+  subjectId: z.number(),
+  internal: z.number().min(0),
+  external: z.number().min(0),
+  attendance: z.number().min(0),
+  total: z.number().min(0),
+});
+
+// Schema for validating batch results
+const batchResultsSchema = z.array(resultSchema).nonempty();
+
+/**
+ * GET /api/results
+ * Fetches all results with related student and subject data
+ */
 export async function GET() {
   try {
     const results = await prisma.result.findMany({
@@ -10,46 +28,81 @@ export async function GET() {
       },
     });
     
-    return NextResponse.json({ success: true, results }, { status: 200 });
+    return NextResponse.json({ 
+      success: true, 
+      data: { results },
+      count: results.length 
+    }, { status: 200 });
   } catch (error: any) {
     console.error('Error fetching results:', error);
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to fetch results' },
+      { 
+        success: false, 
+        error: 'Failed to fetch results',
+        details: process.env.NODE_ENV === 'development' ? String(error) : undefined
+      },
       { status: 500 }
     );
   }
 }
 
+/**
+ * POST /api/results
+ * Creates or updates multiple results
+ */
 export async function POST(request: Request) {
   try {
-    const { results } = await request.json();
+    const body = await request.json();
+    const { results } = body;
 
-    // Validate input
-    if (!Array.isArray(results) || results.length === 0) {
+    // Validate input with Zod
+    const validationResult = batchResultsSchema.safeParse(results);
+    
+    if (!validationResult.success) {
       return NextResponse.json(
-        { success: false, error: 'Invalid results data' },
+        { 
+          success: false, 
+          error: 'Invalid results data',
+          details: validationResult.error.flatten()
+        },
         { status: 400 }
       );
     }
 
-    // Validate student exists
-    const student = await prisma.student.findUnique({
-      where: { id: results[0].studentId }
+    // Validate all students exist
+    const studentIdSet = new Set(results.map((result: z.infer<typeof resultSchema>) => result.studentId));
+    const studentIds = Array.from(studentIdSet).map(String);
+    const students = await prisma.student.findMany({
+      where: { id: { in: studentIds } }
     });
 
-    if (!student) {
+    if (students.length !== studentIds.length) {
       return NextResponse.json(
-        { success: false, error: 'Student not found' },
+        { success: false, error: 'One or more students not found' },
+        { status: 404 }
+      );
+    }
+
+    // Validate all subjects exist
+    const subjectIdSet = new Set(results.map((result: z.infer<typeof resultSchema>) => result.subjectId));
+    const subjectIds = Array.from(subjectIdSet) as number[];
+    const subjects = await prisma.subject.findMany({
+      where: { id: { in: subjectIds } }
+    });
+
+    if (subjects.length !== subjectIds.length) {
+      return NextResponse.json(
+        { success: false, error: 'One or more subjects not found' },
         { status: 404 }
       );
     }
 
     // Create or update results
     const savedResults = await Promise.all(
-      results.map(async (result) => {
+      validationResult.data.map(async (result) => {
         const existingResult = await prisma.result.findFirst({
           where: {
-            studentId: result.studentId,
+            studentId: String(result.studentId),
             subjectId: result.subjectId,
           },
         });
@@ -63,30 +116,67 @@ export async function POST(request: Request) {
               attendance: result.attendance,
               total: result.total,
             },
+            include: {
+              student: true,
+              subject: true,
+            }
           });
         }
 
         return prisma.result.create({
           data: {
-            studentId: result.studentId,
+            studentId: String(result.studentId),
             subjectId: result.subjectId,
             internal: result.internal,
             external: result.external,
             attendance: result.attendance,
             total: result.total,
           },
+          include: {
+            student: true,
+            subject: true,
+          }
         });
       })
     );
 
     return NextResponse.json({
       success: true,
-      results: savedResults
-    });
+      data: { results: savedResults },
+      count: savedResults.length
+    }, { status: 200 });
   } catch (error: any) {
     console.error('Error saving results:', error);
+    
+    // Handle Prisma-specific errors
+    if (error.code === 'P2002') {
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'A result with this data already exists',
+          details: process.env.NODE_ENV === 'development' ? String(error) : undefined
+        },
+        { status: 409 }
+      );
+    }
+    
+    if (error.code === 'P2003') {
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'Referenced student or subject does not exist',
+          details: process.env.NODE_ENV === 'development' ? String(error) : undefined
+        },
+        { status: 400 }
+      );
+    }
+    
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to save results' },
+      { 
+        success: false, 
+        error: 'Failed to save results',
+        details: process.env.NODE_ENV === 'development' ? String(error) : undefined
+      },
       { status: 500 }
     );
   }
