@@ -1,0 +1,234 @@
+
+.image {
+    width: 100px;
+    height: 100px;  
+    object-fit: cover; 
+  }
+  .user-cardImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+  }
+  .user-cardImage img {
+    width: 100px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+  }
+  /*.cardBorder {
+    border: 1px solid #ffffff;
+    border-radius: 1rem;
+    padding: 1rem;
+    flex: 1;
+    min-width: 20px;
+    transition: 0.5s ease;
+    cursor: pointer;
+  } */
+  .cardBorder:hover{
+    transform: scale(1.1); /*when hover scale up the card*/
+  }
+
+  .user-cards{
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 1rem; /* rounded-2xl */
+  flex: 1; /* flex-1 */
+  min-width: 130px; /* min-w-[130px] */
+  padding: 1rem;
+  /*clip-path: polygon(30px 0%, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0% 30px);
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;*/
+  }
+ 
+   /* border for dark mode */
+  /*.dark-mode .cardBorder {
+    border: 1px solid #254627;
+    border-radius: 1rem;
+    padding: 1rem;
+    flex: 1;
+    min-width: 20px;
+    transition: 0.5s ease;
+    cursor: pointer;
+  }*/
+  .dark-mode .user-cards{
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+  /*chaneg the icon to white in dark mode*/
+  .dark-mode .user-cardImage{
+    filter: invert(65%) sepia(39%) saturate(5841%) hue-rotate(80deg) brightness(121%) contrast(120%);
+  }
+
+  .dark-mode .userCard-year{
+    border: 1px solid #726f6f;
+    color: #08FF08;
+    font-size: 0.8em;
+  }
+
+/*sign-in card*/
+  .Maincard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 350px;
+    width: 300px;
+    flex-direction: column;
+    gap: 35px;
+    border-radius: 35px;
+    background: rgba(225, 225, 225, 0.2); /* Set background to be slightly transparent */
+    backdrop-filter: blur(20px); /* Apply blur effect */
+    /* Removed the box-shadow */
+}
+
+.inputBox {
+    position: relative;
+    width: 250px;
+   
+}
+
+.inputBox input {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: none;
+    color: #000;
+    font-size: 1em;
+    background: transparent;
+    border-left: 2px solid #000;
+    border-bottom: 2px solid #000;
+    transition: 0.1s;
+    border-bottom-left-radius: 8px;
+}
+
+.inputBox span {
+    margin-top: 5px;
+    position: absolute;
+    left: 0;
+    transform: translateY(-4px);
+    margin-left: 10px;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 12px;
+    color: #000;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 3px;
+    border-radius: 8px;
+}
+
+.inputBox input:valid~span,
+.inputBox input:focus~span {
+    transform: translateX(113px) translateY(-15px);
+    font-size: 0.8em;
+    padding: 5px 10px;
+    background: #000;
+    letter-spacing: 0.2em;
+    color: #fff;
+    border: 2px;
+}
+
+.inputBox input:valid,
+.inputBox input:focus {
+    border: 2px solid #000;
+    border-radius: 8px;
+}
+
+.enter {
+    height: 45px;
+    width: 100px;
+    border-radius: 5px;
+    border: 2px solid #000;
+    cursor: pointer;
+    background-color: transparent;
+    transition: 0.5s;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 1em;
+}
+
+.enter:hover {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+
+.background-image {
+ background-image: url("/down.jpg");
+  background-size: cover;
+  background-position: center;
+
+}
+
+
+/*.............................*/
+/* From Uiverse.io by vinodjangid07 */ 
+.card {
+  width: fit-content;
+  height: fit-content;
+  background-color: rgb(192, 186, 186);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 25px;
+  gap: 20px;
+}
+
+/* for all social containers*/
+.socialContainer {
+  width: 52px;
+  height: 52px;
+  background-color: rgb(224, 221, 221);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition-duration: .3s;
+}
+/* instagram*/
+.containerOne:hover {
+  background-color: #d62976;
+  transition-duration: .3s;
+}
+/* twitter*/
+.containerTwo:hover {
+  background-color: #00acee;
+  transition-duration: .3s;
+}
+/* linkdin*/
+.containerThree:hover {
+  background-color: #0072b1;
+  transition-duration: .3s;
+}
+/* Whatsapp*/
+.containerFour:hover {
+  background-color: #128C7E;
+  transition-duration: .3s;
+}
+
+.socialContainer:active {
+  transform: scale(0.9);
+  transition-duration: .3s;
+}
+
+.socialSvg {
+  width: 17px;
+}
+
+.socialContainer:hover .socialSvg {
+  animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+

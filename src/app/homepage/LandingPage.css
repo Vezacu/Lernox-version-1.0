@@ -1,0 +1,425 @@
+/* General Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background:linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+body.dark-mode{
+  background: none;
+  background-color: #000000;
+}
+.container {
+  width: 100%;
+  max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the top */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 20px;
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter:blur(100px);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+  transition: transform 0.3s ease-in-out;
+}
+
+
+.nav-left {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.logo-container {
+  display: flex;
+  align-items: center; /* Vertically center the logo and text */
+  gap: 10px; /* Add space between the logo and text */
+  margin-left: auto; /* Push the logo container to the right */
+  margin-right: 20px; /* Add some spacing from the right edge */
+}
+
+.logo-text {
+  font-size: 18px; /* Adjust font size as needed */
+  font-weight: 800; /* Make the text bold */
+  color: #000000; /* Ensure the text color is black */
+}
+.dark-mode .logo-text{
+  filter: invert(65%) sepia(39%) saturate(5841%) hue-rotate(80deg) brightness(121%) contrast(120%);
+}
+.nav-right .login-btn {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px 20px;
+  background:#08FF08;
+  border-radius: 25px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.nav-right a:hover {
+  background: #0d8b0d;
+  color: #000000;
+}
+.upper-image {
+  position: relative; /* Required for pseudo-element positioning */
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px; /* Adjust based on your navbar height */
+  overflow: hidden; /* Ensures the blur effect doesn't overflow */
+}
+
+/* Pseudo-element for the blurry background */
+.upper-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/campus.jpg"); /* Path to your background image */
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+    filter: brightness(60%) contrast(120%) blur(2px);
+  z-index: 1; /* Place it behind the content */
+}
+
+/* Ensure the text and other content are not blurred */
+.upper-section {
+  position: relative; /* Ensures content stays above the blurred background */
+  z-index: 1; /* Places content above the pseudo-element */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px; /* Limit the maximum width */
+  padding: 0 20px;
+  box-sizing: border-box; /* Include padding in the width calculation */
+  margin: 0 auto; /* Center the section */
+}
+
+.upper-left {
+  width: 50%;
+  flex-direction: column;
+}
+
+.hero-text {
+  font-size: clamp(16px, 5vw, 48px); /* Responsive font size */
+  font-weight: 900;
+  color: #f3f3f3;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero-paragraph {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #8f8989;
+  margin-top: 20px;
+}
+
+.upper-right {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  max-width: 600px; /* Limit the maximum width */
+  margin-right: 0;
+}
+
+/* Four Boxes Section */
+.boxes-section {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px; /* Limit the maximum width */
+  padding: 50px 20px;
+  gap: 40px; /* Increased gap between boxes */
+  background: transparent; /* Add background for contrast */
+  box-sizing: border-box; /* Include padding in the width calculation */
+  margin: 0 auto; /* Center the section */
+}
+
+.box {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 30px; /* Increased padding for better spacing */
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align items */
+  gap: 20px; /* Added gap between image and text */
+}
+
+.box:hover {
+  transform: translateY(-10px);
+}
+
+.box img {
+  width: 100%;
+  height: 80%;
+  margin-bottom: 20px; /* Increased margin for better spacing */
+}
+
+.box p {
+  font-size: 14px;
+  color: #7e7b7b;
+  margin: 0; /* Remove default margin */
+}
+
+/* Dark Section */
+.dark-section {
+  width: 100%;
+  max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+  background: #333;
+  color: #fff;
+  padding: 50px 20px;
+  text-align: center;
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.dark-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.learn-more {
+  color: #40e0d0;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.learn-more:hover {
+  text-decoration: underline;
+}
+
+/* Bottom Navbar */
+.bottom-navbar {
+  width: 100%;
+  max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.icon-container {
+  display: flex;
+  gap: 20px;
+}
+
+.icon-container a {
+  transition: transform 0.3s ease;
+}
+
+.icon-container a:hover {
+  transform: scale(1.2);
+}
+.dark-mode .icon-container a{
+  filter: invert(65%) sepia(39%) saturate(5841%) hue-rotate(80deg) brightness(121%) contrast(120%);
+}
+/*...............................*/
+.our-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.our-links h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+.dark-mode .our-links{
+  color: #08FF08;
+}
+.our-links a {
+  color:#777676;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.our-links a:hover {
+  color: #2eaa9e;
+}
+/*...............................*/
+.address-contact {
+  text-align: right;
+}
+.address-contact h3{
+  font-size: 18px;
+}
+.dark-mode .address-contact h3{
+  color: #08FF08;
+}
+.address-contact p {
+  margin: 0;
+  font-size: 14px;
+  color: #777676;
+}
+.address-contact p:hover {
+  color: #2eaa9e;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .upper-section, .boxes-section, .bottom-navbar {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .upper-left, .upper-right {
+    width: 100%;
+  }
+
+  .boxes-section {
+    flex-wrap: wrap;
+  }
+
+  .box {
+    flex: 1 1 45%;
+    margin-bottom: 20px;
+  }
+
+  .bottom-navbar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .icon-container, .address-contact {
+    justify-content: center;
+    text-align: center;
+  }
+  .logo-container {
+    flex-wrap: wrap;
+  }
+
+.upper-image{
+  flex: 1 1 45%;
+}
+}
+
+
+
+
+
+/* Dropdown Toggle Button */
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 20px; /* Adjust spacing as needed */
+  margin-right: 20px;
+}
+.dark-mode .dropdown-toggle{
+  filter: invert(100%) sepia(0%) saturate(7466%) hue-rotate(296deg) brightness(116%) contrast(100%);
+} 
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 60px; /* Adjust based on your navbar height */
+  left: 20px; /* Adjust positioning as needed */
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(100px);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  z-index: 1000;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dropdown-menu a {
+  color: #1f1e1e;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px 20px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+  background: #08FF08;
+  color: #000000;
+}
+
+.coursebtn {
+  color: #000000;
+  height: 50%;
+  align-self: center;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 2);
+  border-radius: 25px;
+  margin-bottom: 40px;
+}
+
+.coursebtn:hover {
+  background: #08FF08;
+  color: #000000;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+#about{
+  background-color: #08FF08;
+}
+
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1000;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menuhover:hover {
+  background-color: black;
+  color: white;
+}
+
+
+

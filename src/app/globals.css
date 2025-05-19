@@ -1,0 +1,299 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.react-calendar {
+  width: 100% !important;
+  border: none !important;
+  font-family: "Inter", sans-serif !important;
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  border-radius: 20px;
+}
+
+.react-calendar__navigation__label__labelText {
+  font-weight: 600;
+}
+
+.react-calendar__tile--active { /*Calendar*/
+  background-color:#08FF08 !important;
+  color: black !important;
+}
+
+.rbc-btn-group:first-child {
+  
+  display: none !important;
+}
+
+.rbc-toolbar-label {
+  text-align: right !important;
+  padding: 0px 20px !important;
+}
+
+.rbc-btn-group:last-child {
+  font-size: 13px !important;
+}
+
+.rbc-btn-group:last-child button { /*Not Active*/
+  border: none !important;
+  background-color:#b8bdb8 !important;
+  margin-left: 2px !important;
+}
+
+.rbc-toolbar button.rbc-active { /*Active*/
+  background-color: #40e0d0 !important; 
+  box-shadow: none !important;
+}
+
+.rbc-time-view {
+  border-color: #a7b1aa !important;
+}
+
+.rbc-time-header {
+  display: none !important;
+}
+
+.rbc-time-content {
+  border: none !important;
+}
+
+.rbc-time-gutter.rbc-time-column {
+  font-size: 12px !important;
+}
+
+.rbc-time-gutter.rbc-time-column .rbc-timeslot-group { /*Time column in bigCalendar*/
+  padding: 0px 20px !important;
+  background-color: rgba(255, 255, 255, 1) !important;
+}
+.dark-mode .rbc-time-gutter.rbc-time-column .rbc-timeslot-group { /*Time column in bigCalendar*/
+  padding: 0px 20px !important;
+  background-color: rgba(0, 0, 0, 0.09) !important;
+  color: #000000 !important;
+}
+.rbc-timeslot-group { /*WorkWeek Body in bigCalendar*/
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.dark-mode .rbc-timeslot-group { /*WorkWeek Body in bigCalendar*/
+  background-color: rgba(255, 255, 255, 0.01) !important;
+}
+
+.rbc-day-slot { /*Day body in bigCalendar*/
+  font-size: 14px !important;
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.rbc-event {
+  border: none !important;
+  color: black !important;
+  padding: 10px !important;
+  margin: 10px !important;
+  width: 99% !important;
+}
+
+.rbc-event:nth-child(1) {
+  background-color: #ffede2 !important;
+}
+.rbc-event:nth-child(2) {
+  background-color: #fefce8 !important;
+}
+.rbc-event:nth-child(3) {
+  background-color: #f4fff1 !important;
+}
+.rbc-event:nth-child(4) {
+  background-color: #fdf2fb !important;
+}
+.rbc-event:nth-child(5) {
+  background-color: #e2f8ff !important;
+}
+.rbc-event:nth-child(6) {
+  background-color: #fefce8 !important;
+}
+.rbc-event:nth-child(7) {
+  background-color: #f2f1ff !important;
+}
+.rbc-event:nth-child(8) {
+  background-color: #fdf2fb !important;
+}
+
+.rbc-event-label{
+  color: gray !important;
+  margin-bottom: 5px;
+}
+
+
+       /* dark-mode.css */
+       body.dark-mode {
+        background-color: #000000;
+        color: #ffffff;
+      }
+ 
+      .background {
+        background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+        background-size: cover;
+        background-position: center;
+      }
+      .leftbg {
+        background-color: rgba(255, 255, 255, 0.5); /* Makes the background color slightly transparent */
+       background: transparent; /* Adds gap between the left side, top, and bottom */
+      }
+      .menuhover:hover .menu-icon { /* When the .menuhover element is hovered over */
+        /* Change the color of the .menu-icon element */
+        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(216deg) brightness(110%) contrast(102%);
+     }
+
+      .dark-mode .leftbg{
+        background-color: rgb(255, 255, 255,0.08);
+        /*border: 1px solid #08ff08;
+    border-radius: 1rem;*/
+      }
+       /* change the icon color to white in dark mode */
+      .dark-mode .menu-icon {
+        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(216deg) brightness(110%) contrast(102%);
+      }
+     .dark-mode .menuhover{
+      color: #ffffff;
+     }
+      
+       /*for light mode*/
+      .CountChartbg{
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+      .performancebg{
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+      .FinanceChartbg{
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+      .Attendancebg{
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+      .EventCalendarbg{
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+      .Announcementbg{
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+      .EventCalendarbg{
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+/*for dark mode*/
+body.dark-mode .CountChartbg {
+  background-color: rgba(95, 125, 128, 0.219);
+}
+body.dark-mode .performancebg{
+  background-color: rgba(255, 255, 255, 0.08);
+}
+body.dark-mode .FinanceChartbg{
+  background-color: rgba(95, 125, 128, 0.219);
+}
+body.dark-mode .Attendancebg{
+  background-color: rgba(95, 125, 128, 0.15);
+}
+body.dark-mode .EventCalendarbg{
+  background-color: rgba(255, 255, 255, 0.08);
+}
+body.dark-mode .Announcementbg{
+  background-color: rgba(255, 255, 255, 0.08);
+}
+body.dark-mode .EventCalendarbg{
+  background-color: rgba(255, 255, 255, 0.08);
+}
+.dark-mode .react-calendar {
+  background-color: rgba(255, 255, 255, 0.1) !important; /*wont work without !important*/
+}
+/*...................*/
+      body.dark-mode .background{
+        background-image: linear-gradient(to right, #000000 0%, black 100%);
+        background-size: cover;
+        background-position: center;
+      }
+      
+.dark-mode .MenuOther{
+  color: #ffffff;
+}
+
+.dark-mode .menuhover:hover{
+  color: #000000;
+  background-color: #08FF08;
+}
+.dark-mode .menuhover:hover .menu-icon { /* When the .menuhover element is hovered over */
+  /* Change the color of the .menu-icon element */
+  filter: invert(0%) sepia(1%) saturate(7471%) hue-rotate(329deg) brightness(91%) contrast(96%);
+}
+ 
+.dark-mode .logoName{
+  color: #08FF08;
+}
+
+.dark-mode .AnnouncementDate{
+  background-color: #08FF08;
+  color: #000000;
+}
+.logo{
+    width: 55px;
+    height: 45px;
+    background-image: url('/logo.png');
+    background-size: contain; /* Ensures the image fits within the specified dimensions without distortion */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image within the div */
+}
+.dark-mode .logo {
+  width: 25px;
+    height: 25px;
+  background-image:url('/logo.png');
+  background-size: contain; /* Ensures the image fits within the specified dimensions without distortion */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-position: center;
+}
+
+.dark-mode .bloodlogo{
+  filter: invert(100%) sepia(0%) saturate(7466%) hue-rotate(296deg) brightness(116%) contrast(100%);
+}
+.dark-mode .datelogo{
+  filter: invert(100%) sepia(0%) saturate(7466%) hue-rotate(296deg) brightness(116%) contrast(100%);
+}
+.dark-mode .maillogo{
+  filter: invert(100%) sepia(0%) saturate(7466%) hue-rotate(296deg) brightness(116%) contrast(100%);
+}
+.dark-mode .phonelogo{
+  filter: invert(100%) sepia(0%) saturate(7466%) hue-rotate(296deg) brightness(116%) contrast(100%);
+}
+
+/* Dropdown Toggle Button */
+.dropdown-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 20px; /* Adjust spacing as needed */
+  margin-right: 20px;
+}
+.dark-mode .dropdown-toggle{
+  filter: invert(100%) sepia(0%) saturate(7466%) hue-rotate(296deg) brightness(116%) contrast(100%);
+} 
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 60px; /* Adjust based on your navbar height */
+  left: 20px; /* Adjust positioning as needed */
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(100px);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  z-index: 1000;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dropdown-menu a {
+  color: #1f1e1e;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 5px 20px;
+}
+.dark-mode .dropdown-menu  {
+  background: rgba(255, 255, 255, 0.1);
+}

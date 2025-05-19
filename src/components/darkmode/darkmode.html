@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Mode Toggle</title>
+  <style>
+    :root {
+      --background-light: #ffffff;
+      --text-light: #000000;
+      --background-dark: #121212;
+      --text-dark: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--background-light);
+      color: var(--text-light);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    body.dark-mode {
+      background-color: var(--background-dark);
+      color: var(--text-dark);
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background-color: var(--background-light);
+      transition: background-color 0.3s ease;
+    }
+
+    .navbar.dark-mode {
+      background-color: var(--background-dark);
+    }
+
+    .dark-mode-toggle {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      background-color: var(--text-light);
+      color: var(--background-light);
+      border: none;
+      border-radius: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .dark-mode-toggle.dark-mode {
+      background-color: var(--text-dark);
+      color: var(--background-dark);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="brand"></div>
+    <button id="darkModeToggle" class="dark-mode-toggle">Dark Mode</button>
+  </nav>
+
+  <script>
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      navbar.classList.toggle('dark-mode');
+      darkModeToggle.classList.toggle('dark-mode');
+      darkModeToggle.textContent = body.classList.contains('dark-mode') ? 'Light Mode' : 'Dark Mode';
+    });
+  </script>
+</body>
+</html>

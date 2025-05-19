@@ -1,0 +1,58 @@
+.dark-mode .teacherspage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.announcementpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.assignmentpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.classpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.eventpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.exampage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.lessonpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.parentpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.resultpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.studentpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.subjectpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.teacherspage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+/*..................................*/
+.teacherFormModal {
+    position: relative;
+    z-index: 1;
+}
+
+.teacherFormModal::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("/dragon_1.jpg");
+    filter: blur(8px); /* Adjust the value to control the level of blur */
+    z-index: -1;
+}
+.closeimage{
+        position: relative;
+        z-index: 2; /* Ensure this is higher than the blurred background */
+}
+  /*..............................*/

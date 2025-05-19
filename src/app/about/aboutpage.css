@@ -1,0 +1,103 @@
+
+  /* About Section */
+  .about-section {
+    width: 100%;
+    padding: 100px 20px;
+    text-align: center;
+  }
+.about-content {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  align-items: center;
+  margin-top: 300px;
+}
+
+.about-title {
+  font-size: 3rem;
+  color: #1ad11a;
+  margin-bottom: 20px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.about-description {
+  font-size: 1.2rem;
+  
+  line-height: 1.6;
+  margin-bottom: 40px;
+  animation: slideUp 1.5s ease-in-out;
+}
+
+.about-features {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 15px;
+  width: 30%;
+  min-width: 250px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card h2 {
+  font-size: 1.5rem;
+  color: #09aa16;
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #7e7b7b;
+  line-height: 1.5;
+}
+.dark-mode .dropdown-toggle{
+  filter: invert(100%) sepia(0%) saturate(7466%) hue-rotate(296deg) brightness(116%) contrast(100%);
+} 
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.nav-right .login-btn {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px 20px;
+  background:#08FF08;
+  border-radius: 25px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.nav-right a:hover {
+  background: #0d8b0d;
+  color: #000000;
+}

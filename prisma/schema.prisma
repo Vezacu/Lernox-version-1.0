@@ -1,0 +1,311 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id       String @id
+  username String @unique
+}
+
+model Student {
+  id                String       @id
+  username          String       @unique
+  name              String
+  surname           String
+  email             String?      @unique
+  phone             String?      @unique
+  address           String
+  img               String?
+  bloodType         String
+  sex               UserSex
+  createdAt         DateTime     @default(now())
+  parentId          String?
+  birthday          DateTime
+  courseId          Int?
+  currentSemesterId Int?
+  attendances       Attendance[]
+  enrollments       Enrollment[]
+  results           Result[]
+  course            Course?      @relation(fields: [courseId], references: [id])
+  currentSemester   Semester?    @relation(fields: [currentSemesterId], references: [id])
+  parent            Parent?      @relation(fields: [parentId], references: [id])
+}
+
+model Teacher {
+  id               String            @id
+  username         String            @unique
+  name             String
+  surname          String
+  email            String?           @unique
+  phone            String?           @unique
+  address          String
+  img              String?
+  bloodType        String
+  sex              UserSex
+  createdAt        DateTime          @default(now())
+  birthday         DateTime
+  subjectOfferings SubjectOffering[]
+}
+
+model Parent {
+  id        String    @id
+  username  String    @unique
+  name      String
+  surname   String
+  email     String?   @unique
+  phone     String    @unique
+  address   String
+  createdAt DateTime  @default(now())
+  students  Student[]
+}
+
+model Course {
+  id             Int             @id @default(autoincrement())
+  name           String          @unique
+  code           String          @unique
+  duration       Int
+  admissionForms AdmissionForm[]
+  announcements  Announcement[]
+  assignments    Assignment[]
+  events         Event[]
+  semesters      Semester[]
+  students       Student[]
+}
+
+model Semester {
+  id               Int               @id @default(autoincrement())
+  number           Int
+  courseId         Int
+  endDate          DateTime          @db.Date
+  startDate        DateTime          @db.Date
+  announcements    Announcement[]
+  assignments      Assignment[]
+  events           Event[]
+  course           Course            @relation(fields: [courseId], references: [id])
+  students         Student[]
+  subjectOfferings SubjectOffering[]
+}
+
+model Subject {
+  id               Int               @id @default(autoincrement())
+  name             String            @unique
+  results          Result[]
+  subjectOfferings SubjectOffering[]
+}
+
+model SubjectOffering {
+  id          Int          @id @default(autoincrement())
+  subjectId   Int
+  semesterId  Int
+  teacherId   String
+  enrollments Enrollment[]
+  exams       Exam[]
+  lessons     Lesson[]
+  semester    Semester     @relation(fields: [semesterId], references: [id])
+  subject     Subject      @relation(fields: [subjectId], references: [id])
+  teacher     Teacher      @relation(fields: [teacherId], references: [id])
+
+  @@unique([subjectId, semesterId, teacherId])
+}
+
+model Lesson {
+  id                Int             @id @default(autoincrement())
+  day               Day
+  startTime         DateTime
+  endTime           DateTime
+  subjectOfferingId Int
+  cancelledAt       DateTime?
+  cancelledById     String?
+  isMakeupClass     Boolean         @default(false)
+  reason            String?
+  status            LessonStatus    @default(SCHEDULED)
+  attendances       Attendance[]
+  subjectOffering   SubjectOffering @relation(fields: [subjectOfferingId], references: [id])
+}
+
+model Exam {
+  id                Int             @id @default(autoincrement())
+  title             String
+  startTime         DateTime
+  endTime           DateTime
+  subjectOfferingId Int
+  subjectOffering   SubjectOffering @relation(fields: [subjectOfferingId], references: [id])
+}
+
+model Assignment {
+  id          Int       @id @default(autoincrement())
+  title       String
+  startDate   DateTime
+  dueDate     DateTime
+  attachment  String?
+  courseId    Int?
+  date        DateTime  @default(now())
+  description String?
+  semesterId  Int?
+  course      Course?   @relation(fields: [courseId], references: [id])
+  semester    Semester? @relation(fields: [semesterId], references: [id])
+}
+
+model Result {
+  id         Int      @id @default(autoincrement())
+  studentId  String
+  attendance Int
+  createdAt  DateTime @default(now())
+  external   Int
+  internal   Int
+  subjectId  Int
+  total      Int
+  updatedAt  DateTime @updatedAt
+  student    Student  @relation(fields: [studentId], references: [id])
+  subject    Subject  @relation(fields: [subjectId], references: [id])
+
+  @@unique([studentId, subjectId])
+}
+
+model Attendance {
+  id        Int      @id @default(autoincrement())
+  date      DateTime
+  present   Boolean
+  studentId String
+  lessonId  Int
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  student   Student  @relation(fields: [studentId], references: [id])
+
+  @@unique([studentId, lessonId, date])
+  @@index([date])
+}
+
+model Event {
+  id                Int       @id @default(autoincrement())
+  title             String
+  description       String
+  startDate         DateTime  @db.Date
+  endDate           DateTime  @db.Date
+  courseId          Int?
+  semesterId        Int?
+  type              EventType
+  affectsAttendance Boolean   @default(true)
+  course            Course?   @relation(fields: [courseId], references: [id])
+  semester          Semester? @relation(fields: [semesterId], references: [id])
+}
+
+model Announcement {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String
+  date        DateTime  @default(now())
+  courseId    Int?
+  semesterId  Int?
+  endDate     DateTime
+  startDate   DateTime
+  course      Course?   @relation(fields: [courseId], references: [id])
+  semester    Semester? @relation(fields: [semesterId], references: [id])
+}
+
+model AdmissionForm {
+  id                 String              @id @default(cuid())
+  studentName        String
+  studentSurname     String
+  email              String?
+  phone              String?
+  address            String
+  birthday           DateTime
+  bloodType          String
+  sex                UserSex
+  courseId           Int
+  parentName         String
+  parentPhone        String
+  parentEmail        String
+  parentAddress      String
+  img                String?
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  status             AdmissionStatus     @default(PENDING)
+  course             Course              @relation(fields: [courseId], references: [id])
+  payments           Payment[]
+  verificationTokens VerificationToken[]
+}
+
+model Payment {
+  id          String        @id @default(cuid())
+  admissionId String
+  amount      Float
+  verifiedBy  String?
+  createdAt   DateTime      @default(now())
+  img         String?
+  updatedAt   DateTime      @updatedAt
+  status      PaymentStatus @default(PENDING)
+  admission   AdmissionForm @relation(fields: [admissionId], references: [id])
+}
+
+model VerificationToken {
+  id          String        @id @default(cuid())
+  token       String        @unique
+  admissionId String
+  expires     DateTime
+  createdAt   DateTime      @default(now())
+  admission   AdmissionForm @relation(fields: [admissionId], references: [id])
+}
+
+model Enrollment {
+  id                Int              @id @default(autoincrement())
+  studentId         String
+  subjectOfferingId Int
+  status            EnrollmentStatus @default(ACTIVE)
+  student           Student          @relation(fields: [studentId], references: [id])
+  subjectOffering   SubjectOffering  @relation(fields: [subjectOfferingId], references: [id])
+
+  @@unique([studentId, subjectOfferingId])
+}
+
+enum UserSex {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum Day {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+}
+
+enum AdmissionStatus {
+  PENDING
+  PARENT_VERIFIED
+  PAYMENT_VERIFIED
+  COMPLETED
+  REJECTED
+}
+
+enum PaymentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum LessonStatus {
+  SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+
+enum EventType {
+  HOLIDAY
+  EXAM
+  COLLEGE_EVENT
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  INACTIVE
+  COMPLETED
+  WITHDRAWN
+}
