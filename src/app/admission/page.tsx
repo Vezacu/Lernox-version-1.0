@@ -1,6 +1,6 @@
-"use client";
+"use client"; 
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import { CldUploadWidget } from "next-cloudinary";
 import Link from "next/link";
 import DarkModeToggle from "@/components/darkmode/darkmode";
-import '../styles/Landingpage.css';
+import "../styles/Landingpage.css";
 
 // Define the admission schema
 const admissionSchema = z.object({
@@ -53,7 +53,8 @@ const courses = [
   { id: "4", name: "M.Tech" },
 ];
 
-export default function AdmissionPage() {
+// Component that uses the search params
+function AdmissionContent() {
   const [studentPhoto, setStudentPhoto] = useState<any>(null);
   const [paymentScreenshot, setPaymentScreenshot] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -491,7 +492,7 @@ export default function AdmissionPage() {
                   
                 />
                 <label htmlFor="hasExistingParent" className="ml-2 text-sm text-gray-700">
-                  My child's parent/guardian already has an account
+                  My child parent/guardian already has an account
                 </label>
               </div>
               
@@ -689,5 +690,19 @@ export default function AdmissionPage() {
       </form>
     </div>
     </div>
+  );
+}
+
+// Main component with Suspense boundary
+export default function AdmissionPage() {
+  return (
+    <Suspense fallback={
+      <div className="text-center p-8 mt-20">
+        <h1 className="text-2xl font-bold">Loading...</h1>
+        <p className="mt-4">Please wait while the form is loading...</p>
+      </div>
+    }>
+      <AdmissionContent />
+    </Suspense>
   );
 }

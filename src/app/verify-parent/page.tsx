@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect } from 'react';
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { verifyParentEmail } from '@/lib/actions/admission';
+import { useEffect } from 'react';
 
-export default function VerifyPage() {
+// Component that uses the search params
+function VerifyParentContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
 
@@ -35,5 +37,19 @@ export default function VerifyPage() {
       <h1 className="text-2xl font-bold">Verifying Email...</h1>
       <p className="mt-4">Please wait while we verify your email address.</p>
     </div>
+  );
+}
+
+// Main component with Suspense boundary
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={
+      <div className="text-center p-8">
+        <h1 className="text-2xl font-bold">Loading...</h1>
+        <p className="mt-4">Please wait...</p>
+      </div>
+    }>
+      <VerifyParentContent />
+    </Suspense>
   );
 }

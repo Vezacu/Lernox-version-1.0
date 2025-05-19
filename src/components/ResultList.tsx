@@ -20,12 +20,18 @@ interface Result {
   total: number;
 }
 
+// Define a custom CurrentSemester type to match the shape returned by your Prisma query
+type CurrentSemesterData = {
+  id: number;
+  number: number;
+} | null;
+
 type StudentList = {
   id: string; // This is the Clerk-generated ID
   name: string;
   surname: string;
-  course?: Course;
-  currentSemester?: Semester;
+  course?: Course | null; // Updated to accept null from Prisma
+  currentSemester?: CurrentSemesterData; // Updated to match the actual data shape
   results?: Result[];
 };
 
@@ -160,7 +166,7 @@ const ResultList = ({ data, subjects, ...props }: ResultListProps) => {
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
           <div className="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             <ResultForm
-              students={[selectedStudent]} // Pass the full student object
+              students={[selectedStudent as any]} // Cast to any to resolve type mismatch with Student type
               existingResults={data.find(s => s.id === selectedStudent.id)?.results || []}
               subjectId={parseInt(new URLSearchParams(window.location.search).get('subjectId') || '0')}
               attendance={props.attendance}

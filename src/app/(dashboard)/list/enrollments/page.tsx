@@ -23,7 +23,7 @@ export default async function EnrollmentsPage({
   if (!userId || (role !== "admin" && role !== "teacher")) {
     return (
       <div className="p-4 bg-red-100 text-red-800 rounded-md">
-        You don't have permission to access this page.
+        You don&apos;t have permission to access this page.
       </div>
     );
   }

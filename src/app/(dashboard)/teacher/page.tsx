@@ -112,7 +112,7 @@ const TeacherPage = async () => {
       <div className="w-full xl:w-2/3 flex flex-col gap-6">
         <div className="w-full bg-white p-4 rounded-md shadow-sm">
           <h1 className="text-xl font-semibold mb-4">
-            {teacher.name} {teacher.surname}'s Teaching Schedule
+            {teacher.name} {teacher.surname}&apos;s Teaching Schedule
           </h1>
           
           {lessons.length > 0 ? (

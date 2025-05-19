@@ -137,7 +137,7 @@ const CourseForm = ({ type, data, setOpen }: CourseFormProps) => {
           name="name"
           register={register}
           error={errors.name}
-          disabled={loading}
+         
         />
 
         <InputField
@@ -146,7 +146,7 @@ const CourseForm = ({ type, data, setOpen }: CourseFormProps) => {
           type="number"
           register={register}
           error={errors.duration}
-          disabled={loading}
+          
         />
 
         <InputField
@@ -155,7 +155,6 @@ const CourseForm = ({ type, data, setOpen }: CourseFormProps) => {
           type="number"
           register={register}
           error={errors.semesters}
-          disabled={loading}
         />
 
         {formError && (

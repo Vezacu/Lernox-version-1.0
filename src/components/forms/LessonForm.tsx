@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import InputField from "../InputField";
 import { z } from "zod";
 import { useFormState } from "react-dom";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState, useCallback } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { createLesson, updateLesson } from "@/lib/actions";
@@ -59,14 +59,14 @@ const LessonForm = ({
   const { courses = [], semesters = [], subjectOfferings = [] } = relatedData || {};
   const [loading, setLoading] = useState(true);
   
-  // Format time for display
-  const formatTimeForInput = (dateTime?: Date) => {
+  // Format time for display - wrapped in useCallback to prevent dependency changes
+  const formatTimeForInput = useCallback((dateTime?: Date) => {
     if (!dateTime) return "";
     return dateTime.toTimeString().substring(0, 5); // "HH:MM" format
-  };
+  }, []);
 
-  // Extract data for an update form
-  const getUpdateFormDefaults = (): UpdateFormDefaults | null => {
+  // Extract data for an update form - with formatTimeForInput now stable in dependencies
+  const getUpdateFormDefaults = useCallback((): UpdateFormDefaults | null => {
     if (!data || type !== "update") return null;
     
     try {
@@ -84,7 +84,7 @@ const LessonForm = ({
       console.error("Error extracting update data:", error);
       return null;
     }
-  };
+  }, [data, type, formatTimeForInput]);
   
   // Create separate form hooks for create and update
   const { 
@@ -146,7 +146,7 @@ const LessonForm = ({
   const [filteredSemesters, setFilteredSemesters] = useState<any[]>([]);
   const [filteredSubjectOfferings, setFilteredSubjectOfferings] = useState<any[]>([]);
 
-  // Initialize update form with data
+  // Initialize update form with data - now correctly using getUpdateFormDefaults in dependencies
   useEffect(() => {
     if (type === "update" && data) {
       const defaults = getUpdateFormDefaults();
@@ -163,7 +163,7 @@ const LessonForm = ({
       }
     }
     setLoading(false);
-  }, [type, data, setValueUpdate]);
+  }, [type, data, setValueUpdate, getUpdateFormDefaults]);
 
   // Filter semesters based on selected course
   useEffect(() => {

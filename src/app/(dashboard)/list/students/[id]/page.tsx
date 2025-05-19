@@ -1,4 +1,3 @@
-
 import Announcements from "@/components/Announcements";
 import FormContainer from "@/components/FormContainer";
 import Performance from "@/components/Performance";
@@ -50,12 +49,13 @@ const SingleStudentPage = async ({
   const absent = total - present;
   const percentage = total > 0 ? Math.round((present / total) * 100) : 0;
 
-  // Prepare attendance data object - without recentAttendances since we removed that from UI
+  // Prepare attendance data object - now with recentAttendances as an empty array
   const attendanceData = {
     present,
     absent,
     total,
-    percentage
+    percentage,
+    recentAttendances: [] // Add this empty array to satisfy the type requirement
   };
 
   return (

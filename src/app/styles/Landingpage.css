@@ -13,15 +13,15 @@ body.dark-mode{
 }
 .container {
   width: 100%;
-  max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start; /* Align content to the top */
   overflow-x: hidden; /* Prevent horizontal overflow */
-   margin: 0 auto;
-  padding: 0 1rem;
 }
 
 .navbar {

@@ -8,6 +8,44 @@ interface PageProps {
   };
 }
 
+// Define interfaces for the data structures based on Prisma schema
+interface Subject {
+  id: number;
+  name: string;
+}
+
+interface Result {
+  id: number;
+  studentId: string;
+  subjectId: number;
+  internal: number;
+  external: number;
+  attendance: number;
+  total: number;
+  createdAt: Date;
+  updatedAt: Date;
+  subject: Subject;
+}
+
+interface Course {
+  id: number;
+  name: string;
+}
+
+interface Semester {
+  id: number;
+  number: number;
+}
+
+interface Student {
+  id: string;
+  name: string;
+  surname: string;
+  course?: Course | null;
+  currentSemester?: Semester | null;
+  results: Result[];
+}
+
 export default async function StudentResultPage({ params }: PageProps) {
   const student = await prisma.student.findUnique({
     where: { id: params.id },
@@ -20,7 +58,7 @@ export default async function StudentResultPage({ params }: PageProps) {
         }
       }
     }
-  }) as any;
+  }) as Student;
 
   if (!student) {
     notFound();
@@ -28,9 +66,9 @@ export default async function StudentResultPage({ params }: PageProps) {
 
   // Calculate overall performance
   const totalResults = student.results.length;
-  const passedSubjects = student.results.filter((r: { total: number }) => r.total >= 35).length;
+  const passedSubjects = student.results.filter((r) => r.total >= 35).length;
   const overallPercentage = totalResults > 0 
-    ? (student.results.reduce((acc: number, r: { total: number }) => acc + r.total, 0) / (totalResults * 100)) * 100 
+    ? (student.results.reduce((acc, r) => acc + r.total, 0) / (totalResults * 100)) * 100 
     : 0;
 
   return (
@@ -109,7 +147,7 @@ export default async function StudentResultPage({ params }: PageProps) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {student.results.map((result) => (
+                {student.results.map((result: Result) => (
                   <tr key={result.id} className="hover:bg-gray-50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {result.subject.name}

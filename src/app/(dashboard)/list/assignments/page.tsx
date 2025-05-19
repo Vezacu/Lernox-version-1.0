@@ -7,6 +7,7 @@ import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import { Assignment, Prisma } from "@prisma/client";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import InteractiveRow from "@/components/InteractiveRow";
 import { format } from "date-fns";

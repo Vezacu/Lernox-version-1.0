@@ -21,6 +21,9 @@ interface StudentFiltersProps {
     id: number;
     name: string;
     code: string;
+    subjectOfferings?: {
+      semesterId: number;
+    }[];
   }[];
 }
 

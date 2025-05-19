@@ -46,9 +46,7 @@ const StudentForm = dynamic(() => import("./forms/StudentForm"), {
 const SubjectForm = dynamic(() => import("./forms/SubjectForm"), {
   loading: () => <p className="text-center py-4">Loading form...</p>,
 });
-const ExamForm = dynamic(() => import("./forms/ExamForm"), {
-  loading: () => <p className="text-center py-4">Loading form...</p>,
-});
+
 const ParentForm = dynamic(() => import("./forms/ParentForm"), {
   loading: () => <p className="text-center py-4">Loading form...</p>,
 });
@@ -97,14 +95,6 @@ const forms: {
   ),
   student: (setOpen, type, data, relatedData) => (
     <StudentForm
-      type={type}
-      data={data}
-      setOpen={setOpen}
-      relatedData={relatedData}
-    />
-  ),
-  exam: (setOpen, type, data, relatedData) => (
-    <ExamForm
       type={type}
       data={data}
       setOpen={setOpen}

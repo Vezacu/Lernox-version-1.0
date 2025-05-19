@@ -31,7 +31,7 @@ const ParentPage = async () => {
           students.map((student) => (
             <div className="w-full bg-white p-4 rounded-md shadow-sm" key={student.id}>
               <h1 className="text-xl font-semibold mb-4">
-                {student.name} {student.surname}'s Schedule
+                {student.name} {student.surname}&apos;s Schedule
               </h1>
               <div className="text-sm text-gray-500 mb-3">
                 {student.course?.name}{student.currentSemester ? ` - Semester ${student.currentSemester.number}` : ''}

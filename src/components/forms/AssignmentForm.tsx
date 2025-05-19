@@ -60,7 +60,7 @@ export default function AssignmentForm({
   
   // Create form state for submission with a callback to handle the response
   const [formState, formAction] = useFormState(
-    async (prevState, formData) => {
+    async (prevState: { success: boolean; error: boolean }, formData: any) => {
       setIsLoading(true);
       try {
         // Call the appropriate action based on form type

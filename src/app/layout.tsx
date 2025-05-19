@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,10 @@ export default function RootLayout({
     <ClerkProvider>
     <html lang="en">
       <head>
-        <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+        <Script 
+          src="https://upload-widget.cloudinary.com/global/all.js"
+          strategy="beforeInteractive"
+        />
       </head>
       <body className={inter.className}>
         {children}<ToastContainer position="bottom-right" theme="dark"/>

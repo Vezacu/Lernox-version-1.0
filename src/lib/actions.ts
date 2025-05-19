@@ -12,13 +12,20 @@ import {
   SubjectOfferingSchema, 
   enrollmentSchema,
   CourseSchema,
-  AnnouncementSchema
+  AnnouncementSchema,
+  
 } from "./formValidationSchemas";
 import { z } from 'zod';
 import prisma from "./prisma";
 import { auth, clerkClient } from "@clerk/nextjs/server";
-import { PaymentStatus, Prisma, LessonStatus } from "@prisma/client";
+import { PaymentStatus, Prisma, LessonStatus, EnrollmentStatus } from "@prisma/client";
 import { error } from "console";
+
+// Define ResultSchema type to fix "Cannot find name 'ResultSchema'" error
+type ResultSchema = {
+  studentId: string;
+  subjects: { subjectId: number; marks: number }[];
+};
 
 type CurrentState = { success: boolean; error: boolean; message?: string;};
 
@@ -613,11 +620,11 @@ export const updateResult = async (id: number, data: ResultSchema) => {
   try {
     console.log("Updating result with data:", data);
     const result = await prisma.result.update({
-      where: { id: id.toString() }, // Ensure id is a string if your schema expects it
+      where: { id: id }, // Use the numeric ID directly
       data: {
         studentId: data.studentId,
         subjectId: data.subjects[0].subjectId, // Assuming you want to update the first subject
-        marks: data.subjects[0].marks,
+        internal: data.subjects[0].marks,
       },
     });
     return { success: true, result };
@@ -636,15 +643,16 @@ export const deleteResult = async (
   formData: FormData
 ) => {
   try {
-    const id = formData.get("id") as string;
+    const idRaw = formData.get("id") as string;
+    const id = parseInt(idRaw, 10);
 
-    if (!id) {
-      return { success: false, error: true };
+    if (isNaN(id)) {
+      return { success: false, error: true, message: "Invalid ID" };
     }
 
     await prisma.result.delete({
       where: {
-        id: id, // Use the ID as a string directly
+        id: id,
       },
     });
 
@@ -1506,7 +1514,7 @@ export async function batchEnroll(data: {
             studentId,
             subjectOfferingId,
             enrollmentDate: now,
-            status: "ACTIVE",
+            status: EnrollmentStatus.ACTIVE,
           });
         }
       }
@@ -1648,8 +1656,8 @@ export async function promoteStudents(courseId: number, currentSemesterId: numbe
       include: {
         results: {
           where: {
-            // Use subjectOfferingId directly with "in" operator instead of trying to traverse a relation
-            subjectOfferingId: {
+            // Use subjectId directly with "in" operator instead of trying to traverse a relation
+            subjectId: {
               in: currentOfferingIds
             }
           },
