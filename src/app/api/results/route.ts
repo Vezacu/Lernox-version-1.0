@@ -1,6 +1,25 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
+export async function GET() {
+  try {
+    const results = await prisma.result.findMany({
+      include: {
+        student: true,
+        subject: true,
+      },
+    });
+    
+    return NextResponse.json({ success: true, results }, { status: 200 });
+  } catch (error: any) {
+    console.error('Error fetching results:', error);
+    return NextResponse.json(
+      { success: false, error: error.message || 'Failed to fetch results' },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(request: Request) {
   try {
     const { results } = await request.json();
