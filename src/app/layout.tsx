@@ -9,8 +9,8 @@ import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Lama Dev School Management Dashboard",
-  description: "Next.js School Management System",
+  title: "Lernox",
+  description: "Next.js College Management System",
 };
 
 export default function RootLayout({

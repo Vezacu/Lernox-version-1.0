@@ -274,7 +274,7 @@ const FormModal = ({
             >
               <div className="mb-4 flex justify-between items-center">
                 <h2 className="text-xl font-semibold capitalize">
-                  {type} {table}
+                  {/* {type} {table} */}
                 </h2>
                 <button
                   className="cursor-pointer hover:bg-gray-100 p-1 rounded-full"
