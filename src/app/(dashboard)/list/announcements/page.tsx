@@ -25,10 +25,10 @@ const AnnouncementListPage = async ({
       header: "Title",
       accessor: "title",
     },
-    {
-      header: "Description", 
-      accessor: "description",
-    },
+    // {
+    //   header: "Description", 
+    //   accessor: "description",
+    // },
     {
       header: "Start Date",
       accessor: "startDate",

@@ -35,17 +35,15 @@ const InteractiveRow = ({ item, role, actions, href }: InteractiveRowProps) => {
       className="border-b border-gray-200 hover:bg-gray-50 cursor-pointer" 
       onClick={handleRowClick}
     >
-      <td className="p-3">{item.title}</td>
-      <td className="p-3">{item.course || 'N/A'}</td>
-      <td className="p-3">{item.semester ? `Semester ${item.semester}` : 'N/A'}</td>
-      <td className="p-3">
+      <td className="py-3 px-0">{item.title}</td>
+      <td className="p-py-3 px-0">
         {format(new Date(item.startDate), "MMM dd, yyyy")}
       </td>
-      <td className="p-3">
+      <td className="py-3 px-0-0">
         {format(new Date(item.endDate), "MMM dd, yyyy")}
       </td>
       {(role === "admin" || role === "teacher") && (
-        <td className="p-3 actions-cell" onClick={e => e.stopPropagation()}>
+        <td className="py-3 px-0 actions-cell" onClick={e => e.stopPropagation()}>
           {actions}
         </td>
       )}
