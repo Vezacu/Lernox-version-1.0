@@ -26,7 +26,7 @@ const InteractiveRow = ({ item, role, actions, href }: InteractiveRowProps) => {
       return;
     }
     
-    const detailUrl = href || `/list/assignments/${item.id}`;
+    const detailUrl = href || `/list/announcements/${item.id}`;
     router.push(detailUrl);
   };
 
