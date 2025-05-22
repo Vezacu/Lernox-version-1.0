@@ -19,14 +19,6 @@ const ApplicationStatus: React.FC = () => {
       
     }
   }, []);
-  
-  const checkStatus = () => {
-    document.getElementById("statusModal")?.classList.remove("hidden");
-  };
-
-  const closeModal = () => {
-    document.getElementById("statusModal")?.classList.add("hidden");
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-gray-100">
@@ -94,80 +86,18 @@ const ApplicationStatus: React.FC = () => {
             >
               Return to Home
             </button>
-            <button
-              onClick={checkStatus}
-              className="bg-gray-100 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors whitespace-nowrap"
-            >
-              Check Payment Status
-            </button>
           </div>
 
           {/* Support Link */}
           <p className="mt-8 text-sm text-gray-500">
             Need help? Contact support at{" "}
             <a
-              href="https://mail.google.com/mail/?view=cm&to=mooontona275@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&to=lernox3@gmail.com"
               className="text-primary hover:text-[#40e0d0] hover:underline"
             >
               support@Lernox.edu
             </a>
           </p>
-        </div>
-      </div>
-
-      {/* Modal Section */}
-      <div
-        id="statusModal"
-        className="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4"
-      >
-        <div className="bg-white rounded-lg p-6 max-w-md w-full">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-lg font-semibold">Payment Status</h3>
-            <button
-              onClick={closeModal}
-              className="text-gray-400 hover:text-gray-600"
-            >
-              <Image
-                src="/close-icon.png"
-                alt="Close Icon"
-                width={24}
-                height={24}
-                className="w-6 h-6"
-              />
-            </button>
-          </div>
-
-          {/* Payment Status Info */}
-          <div className="mb-6">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 flex items-center justify-center">
-                <Image
-                  src="/pending-icon.png"
-                  alt="Pending Icon"
-                  width={24}
-                  height={24}
-                  className="w-6 h-6"
-                />
-              </div>
-              <div>
-                <p className="font-medium text-gray-900">
-                  Payment Verification in Progress
-                </p>
-                <p className="text-sm text-gray-500">
-                  Submitted on{" "}
-                  <span className="font-semibold">{submissionTime}</span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Close Button */}
-          <button
-            onClick={closeModal}
-            className="w-full bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-          >
-            Close
-          </button>
         </div>
       </div>
     </div>

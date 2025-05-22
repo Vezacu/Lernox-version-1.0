@@ -5,6 +5,11 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import '@/components/cssfile/menuPages.css';
 
+// Debug helper function
+const debug = (message: string, data?: any) => {
+  console.log(`[ResultForm] ${message}`, data !== undefined ? data : '');
+};
+
 interface Student {
   id: string;
   name: string;
@@ -55,7 +60,9 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
   }>(() => {
     if (typeof window !== 'undefined') {
       const savedResults = localStorage.getItem(storageKey);
-      return savedResults ? JSON.parse(savedResults) : {};
+      const parsedResults = savedResults ? JSON.parse(savedResults) : {};
+      debug('Initializing results from localStorage', parsedResults);
+      return parsedResults;
     }
     return {};
   });
@@ -63,6 +70,7 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
   // Save results to localStorage whenever they change
   useEffect(() => {
     if (Object.keys(results).length > 0) {
+      debug('Saving results to localStorage', results);
       localStorage.setItem(storageKey, JSON.stringify(results));
     }
   }, [results, storageKey]);
@@ -85,15 +93,13 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
         // First set loading state
         setLoading(true);
 
-        // Add first console log
-        console.log('StudentId:', studentId);
+        debug('Fetching data for student', studentId);
 
         // Fetch subjects first
         const subjectsRes = await fetch(`/api/students/${studentId}/subjects`);
         const subjectsData = await subjectsRes.json();
 
-        // Add second console log after subjects data is fetched
-        console.log('Fetched subjects:', subjectsData.subjects);
+        debug('Fetched subjects', subjectsData.subjects);
 
         if (!subjectsData.subjects) {
           throw new Error('No subjects data received');
@@ -119,8 +125,7 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
           };
         });
 
-        // Add third console log after attendance processing
-        console.log('Processed attendance:', processedAttendance);
+        debug('Processed attendance data', processedAttendance);
 
         setAttendanceData(processedAttendance);
 
@@ -141,12 +146,14 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
           };
         });
 
+        debug('Setting initial results', initialResults);
         setResults(prev => ({
           ...prev,
           ...initialResults
         }));
 
       } catch (error) {
+        debug('Error fetching data', error);
         console.error('Error fetching data:', error);
         toast.error('Failed to load subjects');
       } finally {
@@ -160,27 +167,44 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
   const calculateAttendanceScore = (percentage: number): number => {
     // More precise calculation with rounding to nearest 0.5
     const score = (percentage / 100) * 10;
-    return Math.min(10, Math.max(0, Math.round(score * 2) / 2));
+    const finalScore = Math.min(10, Math.max(0, Math.round(score * 2) / 2));
+    debug(`Calculated attendance score: ${percentage}% -> ${finalScore} points`);
+    return finalScore;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    debug('Form submission started');
     setLoading(true);
 
     try {
       const studentId = students[0]?.id;
-      if (!studentId) throw new Error('Student ID is missing');
+      if (!studentId) {
+        debug('Form submission failed - missing student ID');
+        throw new Error('Student ID is missing');
+      }
 
-      const formattedResults = enrolledSubjects.map(subject => ({
-        studentId,
-        subjectId: subject.id,
-        internal: Math.min(20, Math.max(0, parseInt(results[subject.id]?.internal || '0'))),
-        external: Math.min(70, Math.max(0, parseInt(results[subject.id]?.external || '0'))),
-        attendance: results[subject.id]?.attendance || 0,
-        total: (parseInt(results[subject.id]?.internal || '0')) + 
-               (parseInt(results[subject.id]?.external || '0')) + 
-               (results[subject.id]?.attendance || 0)
-      }));
+      const formattedResults = enrolledSubjects.map(subject => {
+        const internal = Math.min(20, Math.max(0, parseInt(results[subject.id]?.internal || '0')));
+        const external = Math.min(70, Math.max(0, parseInt(results[subject.id]?.external || '0')));
+        const attendance = results[subject.id]?.attendance || 0;
+        const total = internal + external + attendance;
+        
+        debug(`Formatting result for subject ${subject.id} (${subject.name})`, {
+          internal, external, attendance, total
+        });
+        
+        return {
+          studentId,
+          subjectId: subject.id,
+          internal,
+          external,
+          attendance,
+          total
+        };
+      });
+      
+      debug('Submitting formatted results', formattedResults);
 
       const response = await fetch('/api/results', {
         method: 'POST',
@@ -203,15 +227,18 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
           };
         });
         
+        debug('Form submission successful, updating state and localStorage', updatedResults);
         setResults(updatedResults);
         localStorage.setItem(storageKey, JSON.stringify(updatedResults));
         
         toast.success('Results saved successfully');
         router.refresh();
       } else {
+        debug('API returned error', data.error);
         throw new Error(data.error || 'Failed to save results');
       }
     } catch (error: any) {
+      debug('Form submission error', error);
       console.error('Error saving results:', error);
       toast.error(error.message || 'Failed to save results');
     } finally {
@@ -221,8 +248,11 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
 
   // Handle input change
   const handleInputChange = (studentId: string, field: 'internal' | 'external', value: string) => {
+    debug(`Input change: ${field} for subject ${studentId}`, { value });
+    
     // Don't convert to number immediately to allow empty string
     if (value === '') {
+      debug(`Setting empty value for ${field}`);
       setResults(prev => ({
         ...prev,
         [studentId]: {
@@ -238,6 +268,10 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
     
     // Ensure value is within valid range
     const validValue = Math.min(maxValue, Math.max(0, numValue));
+    
+    if (numValue !== validValue) {
+      debug(`Value adjusted: ${numValue} -> ${validValue} (max: ${maxValue})`);
+    }
 
     setResults(prev => ({
       ...prev,
@@ -250,7 +284,9 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
 
   // Clear all inputs
   const handleClearAll = () => {
+    debug('Clear all button clicked');
     if (window.confirm('Are you sure you want to clear all marks? This cannot be undone.')) {
+      debug('Clearing all results');
       const clearedResults = Object.fromEntries(
         Object.entries(results).map(([id, scores]) => [
           id,
@@ -259,6 +295,9 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
       );
       setResults(clearedResults);
       localStorage.removeItem(storageKey);
+      debug('Results cleared', clearedResults);
+    } else {
+      debug('Clear all cancelled by user');
     }
   };
 

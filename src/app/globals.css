@@ -32,7 +32,9 @@
 .rbc-btn-group:last-child {
   font-size: 13px !important;
 }
-
+.rbc-current-time-indicator{
+  color: blue;
+}
 .rbc-btn-group:last-child button { /*Not Active*/
   border: none !important;
   background-color:#b8bdb8 !important;
@@ -84,7 +86,7 @@
 
 .rbc-event {
   border: none !important;
-  color: black !important;
+  color: rgb(240, 236, 236) !important;
   padding: 10px !important;
   margin: 10px !important;
   width: 99% !important;

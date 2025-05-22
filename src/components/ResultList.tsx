@@ -8,7 +8,84 @@ import ResultForm from "@/components/forms/ResultForm";
 import Pagination from "@/components/Pagination";
 import { Student, Course, Semester, Subject } from "@prisma/client";
 import Link from 'next/link';
+import '@/components/cssfile/menuPages.css';
 
+// Define the score submission data interface
+interface ScoreSubmissionData {
+  studentId: string;
+  subjectId: number;
+  internal: number;
+  external: number;
+  attendance: number;
+}
+
+// Function to submit a student score
+async function submitStudentScore(scoreData: ScoreSubmissionData) {
+  try {
+    console.log('Submitting score data:', JSON.stringify(scoreData, null, 2));
+    
+    // Validate score values
+    if (isNaN(scoreData.internal) || scoreData.internal < 0 || scoreData.internal > 100) {
+      console.log('Internal score validation failed:', scoreData.internal);
+      throw new Error("Internal score must be a number between 0 and 100");
+    }
+    
+    if (isNaN(scoreData.external) || scoreData.external < 0 || scoreData.external > 100) {
+      console.log('External score validation failed:', scoreData.external);
+      throw new Error("External score must be a number between 0 and 100");
+    }
+    
+    if (isNaN(scoreData.attendance) || scoreData.attendance < 0 || scoreData.attendance > 100) {
+      console.log('Attendance validation failed:', scoreData.attendance);
+      throw new Error("Attendance must be a number between 0 and 100");
+    }
+    
+    // Calculate total score
+    const total = scoreData.internal + scoreData.external + scoreData.attendance;
+    console.log('Calculated total score:', total);
+    
+    // Format the payload according to the API's expected format
+    const payload = {
+      results: [{
+        studentId: scoreData.studentId, // Keep as string (Clerk user ID)
+        subjectId: scoreData.subjectId,
+        internal: scoreData.internal,
+        external: scoreData.external,
+        attendance: scoreData.attendance,
+        total
+      }]
+    };
+    
+    console.log('Final payload being sent to API:', JSON.stringify(payload, null, 2));
+    
+    // Make the API request
+    const response = await fetch('/api/results', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+    
+    console.log('API Response status:', response.status, response.statusText);
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => {
+        console.log('Could not parse error response as JSON');
+        return {};
+      });
+      console.error('API Error data:', errorData);
+      throw new Error(`API Error: ${errorData.error || response.statusText}`);
+    }
+    
+    const responseData = await response.json();
+    console.log('API Success response:', responseData);
+    return responseData;
+  } catch (error) {
+    console.error("Failed to submit score:", error);
+    throw error;
+  }
+}
 // Update the Result interface to match your database schema
 interface Result {
   id: number;
@@ -164,7 +241,7 @@ const ResultList = ({ data, subjects, ...props }: ResultListProps) => {
 
       {showResultForm && selectedStudent && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-          <div className="bg-gray-800 rounded-lg p-2 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+          <div className=" bg-white rounded-lg p-2 w-full max-w-4xl max-h-[90vh] overflow-y-auto ">
             <ResultForm
               students={[selectedStudent as any]} // Cast to any to resolve type mismatch with Student type
               existingResults={data.find(s => s.id === selectedStudent.id)?.results || []}

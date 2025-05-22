@@ -168,7 +168,7 @@ const CourseForm = ({ type, data, setOpen }: CourseFormProps) => {
       <button
         type="submit"
         disabled={loading}
-        className={`bg-[#40e0d0] text-gray-900 px-4 py-2 rounded-md hover:bg-blue-600 transition-colors
+        className={`bg-[#40e0d0] text-gray-900 px-4 py-2 rounded-md hover:bg-gray-300 transition-colors
           ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
         {loading ? 'Processing...' : type === "create" ? "Create Course" : "Update Course"}

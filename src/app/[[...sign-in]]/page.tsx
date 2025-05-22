@@ -78,15 +78,15 @@ const [isDropdownOpen, setIsDropdownOpen] = useState(false);
                 <Clerk.GlobalError />
                 <Clerk.Field name="identifier" className="flex flex-col gap-1">
                   <Clerk.Label className="text-sm text-gray-600">Username</Clerk.Label>
-                  <Clerk.Input className="border border-gray-600 p-2 rounded-md bg-gray-200 text-white" type="text" />
+                  <Clerk.Input className="border border-gray-600 p-2 rounded-md bg-gray-200 text-black " type="text" />
                   <Clerk.FieldError className="text-sm text-red-400" />
                 </Clerk.Field>
                 <Clerk.Field name="password" className="flex flex-col gap-1">
                   <Clerk.Label className="text-sm text-gray-600">Password</Clerk.Label>
-                  <Clerk.Input className="border border-gray-600 p-2 rounded-md bg-gray-200 text-white" type="password" />
+                  <Clerk.Input className="border border-gray-600 p-2 rounded-md bg-gray-200 text-black" type="password" />
                   <Clerk.FieldError className="text-sm text-red-400" />
                 </Clerk.Field>
-                <SignIn.Action submit className="mt-4 bg-[#08FF08] hover:bg-green-600 transition-all  font-semibold py-2 rounded-md">
+                <SignIn.Action submit className="mt-4 bg-[#08FF08] hover:bg-green-600 transition-all  font-semibold py-2 rounded-md text-black">
                   Sign In
                 </SignIn.Action>
               </SignIn.Step>
@@ -161,10 +161,10 @@ const [isDropdownOpen, setIsDropdownOpen] = useState(false);
       {/* Bottom Navbar */}
       <nav className="bottom-navbar">
         <div className="icon-container">
-          <a href="https://wa.me/your-whatsapp-link" target="_blank" rel="noopener noreferrer">
-            <Image src="/whatsapp.png" alt="WhatsApp" width={24} height={24} className="butttonIcon" />
-          </a>
-          <a href="https://instagram.com/your-instagram-link" target="_blank" rel="noopener noreferrer">
+          <Link href="https://chat.whatsapp.com/JscRKUQ5m8V6dt6an5v6C3" target="_blank" rel="noopener noreferrer">
+  <Image src="/whatsapp.png" alt="WhatsApp" width={24} height={24} className='butttonIcon'/>
+</Link>
+          <a href="https://www.instagram.com/lernox3?igsh=eTg0OGc5Ymo1cjVp" target="_blank" rel="noopener noreferrer">
             <Image src="/instagram.png" alt="Instagram" width={24} height={24} className="butttonIcon" />
           </a>
           <a href="https://twitter.com/your-twitter-link" target="_blank" rel="noopener noreferrer">

@@ -45,16 +45,7 @@ export default function Courses() {
         pdfLink: "https://drive.google.com/file/d/1ASlpi2n7RupwoJcSvAwlo2lZJJTMWKB0/view?usp=drive_link" 
       },
 
-      { name: "M.Tech",
-        desc: "A professional postgraduate degree preparing students for advanced engineering roles.",
-         image: "/four.jpg",
-         pdfLink: "https://drive.google.com/file/d/1ASlpi2n7RupwoJcSvAwlo2lZJJTMWKB0/view?usp=drive_link" 
-       },
-       { name: "M.Tech",
-        desc: "A professional postgraduate degree preparing students for advanced engineering roles.",
-         image: "/four.jpg",
-         pdfLink: "https://drive.google.com/file/d/1ASlpi2n7RupwoJcSvAwlo2lZJJTMWKB0/view?usp=drive_link" 
-       }
+     
   ];
 
   const handleCourseSelect = (course:string) => {
@@ -84,10 +75,7 @@ export default function Courses() {
           <span className="logo-text text-black">LERNOX</span>
         </div>
       </div>
-      <div className="nav-right">
-        <Link href="sign-in">LOGIN</Link>
       
-      </div>
     </nav>
     
     {/* Hero Section with Campus Image */}
@@ -124,9 +112,9 @@ export default function Courses() {
        {/* Bottom Navbar */}
        <nav className="bottom-navbar">
               <div className="icon-container">
-                <Link href="https://wa.me/your-whatsapp-link" target="_blank" rel="noopener noreferrer">
-                  <Image src="/whatsapp.png" alt="WhatsApp" width={24} height={24} className='butttonIcon'/>
-                </Link>
+               <Link href="https://chat.whatsapp.com/JscRKUQ5m8V6dt6an5v6C3" target="_blank" rel="noopener noreferrer">
+  <Image src="/whatsapp.png" alt="WhatsApp" width={24} height={24} className='butttonIcon'/>
+</Link>
                 <Link href="https://instagram.com/your-instagram-link" target="_blank" rel="noopener noreferrer">
                   <Image src="/instagram.png" alt="Instagram" width={24} height={24} className='butttonIcon'/>
                 </Link>

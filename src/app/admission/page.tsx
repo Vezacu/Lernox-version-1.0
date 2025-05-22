@@ -292,10 +292,6 @@ function AdmissionContent() {
           <span className="logo-text text-black">LERNOX</span>
         </div>
       </div>
-      <div className="nav-right">
-        <Link href="sign-in">LOGIN</Link>
-      
-      </div>
     </nav>
  {/********************************/}
 
@@ -316,9 +312,10 @@ function AdmissionContent() {
             <InputField
               label="First Name"
               name="studentName"
+              
               register={register}
               error={errors.studentName}
-              className="space-y-2 w-full md:w-[70%] lg:w-[50%]"
+              className="space-y-2 w-full md:w-[70%] lg:w-[50%] text-black"
             />
 
             <InputField
@@ -326,7 +323,7 @@ function AdmissionContent() {
               name="studentSurname"
               register={register}
               error={errors.studentSurname}
-            className="space-y-2 w-full md:w-[70%] lg:w-[50%]"
+            className="space-y-2 w-full md:w-[70%] lg:w-[50%] text-black"
             />
 
             <InputField
@@ -335,7 +332,7 @@ function AdmissionContent() {
               type="email"
               register={register}
               error={errors.email}
-            className="space-y-2 w-full md:w-[70%] lg:w-[50%]"
+            className="space-y-2 w-full md:w-[70%] lg:w-[50%] text-black"
             />
 
             <InputField
@@ -343,7 +340,7 @@ function AdmissionContent() {
               name="phone"
               register={register}
               error={errors.phone}
-             className="space-y-2 w-full md:w-[70%] lg:w-[50%]"
+             className="space-y-2 w-full md:w-[70%] lg:w-[50%] text-black"
             />
 
             <InputField
@@ -351,18 +348,18 @@ function AdmissionContent() {
               name="address"
               register={register}
               error={errors.address}
-              className="space-y-2 w-full md:w-[70%] lg:w-[50%]"
+              className="space-y-2 w-full md:w-[70%] lg:w-[50%] text-black"
             />
 
             <div className="space-y-2">
-              <label htmlFor="birthday" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="birthday" className="block text-sm font-medium text-gray-700 mb-1 text-black">
                 Birthday <span className="text-red-500">*</span>
               </label>
               <input
                 type="date"
                 id="birthday"
                 {...register("birthday")}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-black"
 
               />
               {errors.birthday && (
@@ -371,13 +368,13 @@ function AdmissionContent() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="bloodType" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="bloodType" className="block text-sm font-medium text-gray-700 mb-1 text-black">
                 Blood Type <span className="text-red-500">*</span>
               </label>
               <select
                 id="bloodType"
                 {...register("bloodType")}
-                className="w-full px-4 py-2 border rounded-lg appearance-none focus:ring-2 focus:ring-primary focus:border-transparent pr-8"
+                className="w-full px-4 py-2 border rounded-lg appearance-none focus:ring-2 focus:ring-primary focus:border-transparent pr-8 text-black"
 
               >
                 <option value="">Select Blood Type</option>
@@ -396,13 +393,13 @@ function AdmissionContent() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="sex" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="sex" className="block text-sm font-medium text-gray-700 mb-1 text-black">
                 Sex <span className="text-red-500">*</span>
               </label>
               <select
                 id="sex"
                 {...register("sex")}
-                className="w-full px-4 py-2 border rounded-lg appearance-none focus:ring-2 focus:ring-primary focus:border-transparent pr-8"
+                className=" text-black w-full px-4 py-2 border rounded-lg appearance-none focus:ring-2 focus:ring-primary focus:border-transparent pr-8"
 
               >
                 <option value="">Select Sex</option>
@@ -415,13 +412,13 @@ function AdmissionContent() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="courseId" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="courseId" className="block text-sm font-medium text-gray-700 mb-1 text-black">
                 Course <span className="text-red-500">*</span>
               </label>
               <select
                 id="courseId"
                 {...register("courseId")}
-                className="w-full px-4 py-2 border rounded-lg appearance-none focus:ring-2 focus:ring-primary focus:border-transparent pr-8"
+                className=" text-black w-full px-4 py-2 border rounded-lg appearance-none focus:ring-2 focus:ring-primary focus:border-transparent pr-8"
               >
                 <option value="">Select Course</option>
                 {courses.map(course => (
@@ -434,7 +431,7 @@ function AdmissionContent() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="studentPhoto" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="studentPhoto" className="block text-sm font-medium text-gray-700 mb-1 ">
                 Student Photo
               </label>
               <div className="mt-2">
@@ -476,7 +473,7 @@ function AdmissionContent() {
             <h2 className="text-xl font-semibold mb-6">Parent/Guardian Information</h2>
             
             <div className="mb-6">
-              <div className="flex items-center">
+              <div className="flex items-center text-black">
                 <input
                   type="checkbox"
                   id="hasExistingParent"
@@ -503,12 +500,12 @@ function AdmissionContent() {
                       type="text"
                       placeholder="Parent's Username"
                       {...register("parentUsername")}
-                      className="flex-1 p-2 border rounded-md"
+                      className="flex-1 p-2 border rounded-md text-black"
                     />
                     <button
                       type="button"
                       onClick={checkParent}
-                      className={`px-4 py-2 bg-[#40e0d0] text-black rounded-md ${
+                      className={`px-4 py-2 bg-[#40e0d0] text-black rounded-md text-black ${
                         checkingParent ? "opacity-70 cursor-not-allowed" : ""
                       }`}
                       disabled={checkingParent}
@@ -537,7 +534,7 @@ function AdmissionContent() {
               name="parentName"
               register={register}
               error={errors.parentName}
-            className="space-y-2 w-full md:w-[70%] lg:w-[50%]"
+            className="space-y-2 w-full md:w-[70%] lg:w-[50%] text-black"
             />
 
             <InputField
@@ -545,7 +542,7 @@ function AdmissionContent() {
               name="parentPhone"
               register={register}
               error={errors.parentPhone}
-             className="space-y-2 w-full md:w-[70%] lg:w-[50%]"
+             className="space-y-2 w-full md:w-[70%] lg:w-[50%] text-black"
             />
 
 <InputField
@@ -554,7 +551,7 @@ function AdmissionContent() {
   type="email"
   register={register}
   error={errors.parentEmail}
-  className="space-y-2 w-full md:w-[70%] lg:w-[50%]"
+  className="space-y-2 w-full md:w-[70%] lg:w-[50%] text-black"
 />
 
             <InputField
@@ -562,7 +559,7 @@ function AdmissionContent() {
               name="parentAddress"
               register={register}
               error={errors.parentAddress}
-            className="space-y-2 w-full md:w-[70%] lg:w-[50%]"
+            className="space-y-2 w-full md:w-[70%] lg:w-[50%] text-black"
             />
 </div>
 
@@ -666,7 +663,16 @@ function AdmissionContent() {
           <div className="faq-link">
 <a href="FAQs">Have questions? Check out our FAQs →</a>
 </div>
+<div className="fixed right-50 top-28">
+  <Link 
+    href="/home"
+    className="px-8 py-3 bg-[#40e0d0] text-black rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-[#158277] focus:ring-offset-2 transition-colors hover:bg-[#1ba396]"
+  >
+    Back to Home
+  </Link>
+</div>
         <div className="lg:col-span-2 flex justify-end">
+       
           <button
             type="submit"
             disabled={isSubmitting}
