@@ -50,12 +50,13 @@ const SingleStudentPage = async ({
   const absent = total - present;
   const percentage = total > 0 ? Math.round((present / total) * 100) : 0;
 
-  // Prepare attendance data object - without recentAttendances since we removed that from UI
+  // Prepare attendance data object with an empty recentAttendances array to satisfy the AttendanceData interface
   const attendanceData = {
     present,
     absent,
     total,
-    percentage
+    percentage,
+    recentAttendances: []
   };
 
   return (
@@ -183,7 +184,7 @@ const SingleStudentPage = async ({
         {/* BOTTOM */}
         <div className="mt-4  rounded-md p-4 h-[800px] teacherIdsmallCard">
           <h1>Student&apos;s Schedule</h1>
-         <BigCalendarContainer type="semesterId" id={student.currentSemesterId} />
+         <BigCalendarContainer type="semesterId" id={student.currentSemesterId!} />
         </div>
       </div>
       {/* RIGHT */}
