@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { format } from 'date-fns';
+import '@/components/cssfile/menuPages.css';
 
 interface AttendanceData {
   present: number;
@@ -61,24 +62,24 @@ const StudentAttendanceCard = ({ id, studentName, attendanceData }: StudentAtten
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border p-4">
+    <div className="bg-white rounded-lg shadow-sm border p-4 teacherspage">
       {studentName && (
         <div className="flex items-center justify-between mb-4">
           <h3 
-            className="font-medium text-gray-800 cursor-pointer hover:text-blue-600" 
+            className="font-medium  cursor-pointer hover:text-gray-300" 
             onClick={viewStudentDetails}
           >
             {studentName}
           </h3>
           <div 
-            className={`text-white text-sm font-medium rounded-full px-3 py-1 ${getAttendanceColor(attendanceData.percentage)}`}
+            className={` text-sm font-medium rounded-full px-3 py-1 ${getAttendanceColor(attendanceData.percentage)}`}
           >
             {attendanceData.percentage}%
           </div>
         </div>
       )}
       
-      <div className="flex justify-between text-sm text-gray-600 mb-3">
+      <div className="flex justify-between text-sm text-gray-300 mb-3">
         <div>Present: {attendanceData.present}</div>
         <div>Absent: {attendanceData.absent}</div>
         <div>Total: {attendanceData.total}</div>
@@ -91,7 +92,7 @@ const StudentAttendanceCard = ({ id, studentName, attendanceData }: StudentAtten
         ></div>
       </div>
       
-      <div className="text-sm text-gray-600 mb-2">
+      <div className="text-sm text-gray-300 mb-2">
         Status: <span className="font-medium">{getAttendanceStatus(attendanceData.percentage)}</span>
       </div>
       

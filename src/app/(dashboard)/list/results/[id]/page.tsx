@@ -1,6 +1,7 @@
 import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import '@/components/cssfile/menuPages.css';
 
 interface PageProps {
   params: {
@@ -72,15 +73,15 @@ export default async function StudentResultPage({ params }: PageProps) {
     : 0;
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="p-6 max-w-6xl mx-auto resultIDpage">
       {/* Back Button with improved styling */}
       <div className="mb-8">
         <Link
           href="/list/results"
-          className="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors shadow-sm group"
+          className="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors shadow-sm group resultIDpage"
         >
           <svg 
-            className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" 
+            className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform " 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
@@ -94,26 +95,26 @@ export default async function StudentResultPage({ params }: PageProps) {
       {/* Main Content Container */}
       <div className="space-y-8">
         {/* Student Info Card */}
-        <div className="bg-white rounded-xl shadow-md overflow-hidden">
+        <div className="bg-white rounded-xl shadow-md overflow-hidden resultIDpage">
           <div className="bg-[#40e0d0] px-6 py-4">
-            <h1 className="text-2xl font-bold ">Student Results</h1>
+            <h1 className="text-2xl font-bold text-black">Student Results</h1>
           </div>
           <div className="p-6">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <p className="text-gray-600 text-sm">Student Name</p>
-                <p className="font-semibold text-lg capitalize">{student.name} {student.surname}</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 ">
+              <div className="bg-gray-50 p-4 rounded-lg resultIDpage">
+                <p className="text-gray-500 text-sm">Student Name</p>
+                <p className="font-semibold text-lg capitalize ">{student.name} {student.surname}</p>
               </div>
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <p className="text-gray-600 text-sm">Course</p>
+              <div className="bg-gray-50 p-4 rounded-lg resultIDpage">
+                <p className="text-gray-500 text-sm text-black">Course</p>
                 <p className="font-semibold text-lg">{student.course?.name}</p>
               </div>
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <p className="text-gray-600 text-sm">Current Semester</p>
+              <div className="bg-gray-50 p-4 rounded-lg resultIDpage">
+                <p className="text-gray-500 text-sm">Current Semester</p>
                 <p className="font-semibold text-lg">{student.currentSemester?.number}</p>
               </div>
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <p className="text-gray-600 text-sm">Overall Performance</p>
+              <div className="bg-gray-50 p-4 rounded-lg resultIDpage">
+                <p className="text-gray-500 text-sm">Overall Performance</p>
                 <p className="font-semibold text-lg">{overallPercentage.toFixed(2)}%</p>
               </div>
             </div>
@@ -126,29 +127,29 @@ export default async function StudentResultPage({ params }: PageProps) {
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
                 <tr className="bg-gray-50">
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider resultIDpage">
                     Subject
                   </th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider resultIDpage">
                     Internal <span className="text-gray-400">(20)</span>
                   </th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider resultIDpage">
                     External <span className="text-gray-400">(70)</span>
                   </th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider resultIDpage">
                     Attendance <span className="text-gray-400">(10)</span>
                   </th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider resultIDpage">
                     Total <span className="text-gray-400">(100)</span>
                   </th>
-                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                  <th scope="col" className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider resultIDpage">
                     Status
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200 bg-white">
+              <tbody className="divide-y divide-gray-200 bg-white ">
                 {student.results.map((result: Result) => (
-                  <tr key={result.id} className="hover:bg-gray-50 transition-colors">
+                  <tr key={result.id} className="hover:bg-gray-50 transition-colors ">
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                       {result.subject.name}
                     </td>
@@ -183,20 +184,20 @@ export default async function StudentResultPage({ params }: PageProps) {
         {/* Summary Section with improved styling */}
         <div className="bg-white rounded-xl shadow-md overflow-hidden">
           <div className="bg-[#08FF08] px-6 py-4">
-            <h2 className="text-xl font-semibold ">Performance Summary</h2>
+            <h2 className="text-xl font-semibold text-black ">Performance Summary</h2>
           </div>
-          <div className="p-6">
+          <div className="p-6 resultIDpage">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-gray-50 p-4 rounded-lg text-center">
-                <p className="text-gray-600 text-sm">Total Subjects</p>
+              <div className="bg-gray-50 p-4 rounded-lg text-center resultIDpage">
+                <p className="text-gray-500 text-sm">Total Subjects</p>
                 <p className="font-semibold text-2xl mt-2">{totalResults}</p>
               </div>
-              <div className="bg-gray-50 p-4 rounded-lg text-center">
-                <p className="text-gray-600 text-sm">Subjects Passed</p>
+              <div className="bg-gray-50 p-4 rounded-lg text-center resultIDpage">
+                <p className="text-gray-500 text-sm">Subjects Passed</p>
                 <p className="font-semibold text-2xl mt-2 text-green-600">{passedSubjects}</p>
               </div>
-              <div className="bg-gray-50 p-4 rounded-lg text-center">
-                <p className="text-gray-600 text-sm">Success Rate</p>
+              <div className="bg-gray-50 p-4 rounded-lg text-center resultIDpage">
+                <p className="text-gray-500 text-sm">Success Rate</p>
                 <p className="font-semibold text-2xl mt-2 text-[#40e0d0]">
                   {totalResults > 0 ? ((passedSubjects / totalResults) * 100).toFixed(2) : 0}%
                 </p>

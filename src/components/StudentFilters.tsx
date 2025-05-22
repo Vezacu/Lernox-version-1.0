@@ -1,5 +1,5 @@
 "use client";
-
+import '@/components/cssfile/menuPages.css';
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
@@ -65,7 +65,7 @@ const StudentFilters = ({ courses, semesters, subjects = [] }: StudentFiltersPro
   return (
     <div className="flex gap-3">
       <select
-        className="p-2 border rounded-md"
+        className="p-2 border rounded-md text-sm text-black filterbg"
         value={courseId || ""}
         onChange={(e) => {
           const query = createQueryString({ 
@@ -85,7 +85,7 @@ const StudentFilters = ({ courses, semesters, subjects = [] }: StudentFiltersPro
       </select>
 
       <select
-        className="p-2 border rounded-md"
+        className="p-2 border rounded-md text-sm text-black filterbg"
         value={semesterId || ""}
         onChange={(e) => {
           const query = createQueryString({ 
@@ -105,7 +105,7 @@ const StudentFilters = ({ courses, semesters, subjects = [] }: StudentFiltersPro
       </select>
 
       <select
-        className="p-2 border rounded-md"
+        className="p-2 border rounded-md text-sm text-black filterbg"
         value={subjectId || ""}
         onChange={(e) => {
           const query = createQueryString({ 

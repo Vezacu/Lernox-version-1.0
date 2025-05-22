@@ -197,7 +197,7 @@ useEffect(() => {
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new teacher" : "Update the teacher"}
+        {type === "create" ? "" : ""}
       </h1>
       <span className="text-xs text-gray-400 font-medium">
         Authentication Information
@@ -206,6 +206,7 @@ useEffect(() => {
         <InputField
           label="Username"
           name="username"
+          className="text-black"
           defaultValue={data?.username}
           register={register}
           error={errors?.username}
@@ -213,6 +214,7 @@ useEffect(() => {
         <InputField
           label="Email"
           name="email"
+          className="text-black"
           defaultValue={data?.email}
           register={register}
           error={errors?.email}
@@ -221,6 +223,7 @@ useEffect(() => {
           label="Password"
           name="password"
           type="password"
+          className="text-black"
           defaultValue=""
           register={register}
           error={errors?.password}
@@ -229,6 +232,7 @@ useEffect(() => {
           <InputField
             label="Id"
             name="id"
+            className="text-black"
             defaultValue={data?.id}
             register={register}
             error={errors?.id}
@@ -279,6 +283,7 @@ useEffect(() => {
           defaultValue={data?.name}
           register={register}
           error={errors.name}
+           className="text-black" 
         />
         <InputField
           label="Last Name"
@@ -286,6 +291,7 @@ useEffect(() => {
           defaultValue={data?.surname}
           register={register}
           error={errors.surname}
+           className="text-black" 
         />
         <InputField
           label="Phone"
@@ -293,6 +299,7 @@ useEffect(() => {
           defaultValue={data?.phone}
           register={register}
           error={errors.phone}
+           className="text-black" 
         />
         <InputField
           label="Address"
@@ -300,11 +307,12 @@ useEffect(() => {
           defaultValue={data?.address}
           register={register}
           error={errors.address}
+           className="text-black" 
         />
         <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500">Blood Type</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             {...register("bloodType")}
             defaultValue={data?.bloodType || ""}
           >
@@ -327,6 +335,7 @@ useEffect(() => {
         <InputField
         label="Birthday"
         name="birthday"
+         className="text-black" 
         defaultValue={
           data?.birthday
             ? new Date(data.birthday).toISOString().split("T")[0] // Format as yyyy-MM-dd
@@ -339,7 +348,7 @@ useEffect(() => {
         <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500">Sex</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             {...register("sex")}
             defaultValue={data?.sex || "MALE"}
           >
@@ -363,7 +372,7 @@ useEffect(() => {
         <div className="flex flex-col gap-2">
           <label className="text-xs text-gray-500">Course</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             value={selectedCourseId}
             onChange={(e) => {
               const value = e.target.value;
@@ -384,7 +393,7 @@ useEffect(() => {
         <div className="flex flex-col gap-2">
           <label className="text-xs text-gray-500">Semester</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             value={selectedSemesterId}
             onChange={(e) => setSelectedSemesterId(e.target.value)}
             disabled={!selectedCourseId}
@@ -403,7 +412,7 @@ useEffect(() => {
           <label className="text-xs text-gray-500">Available Subject Offerings</label>
           <select
             multiple
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full h-32"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full h-32 text-black"
             disabled={!selectedSemesterId}
             onChange={(e) => {
               const options = Array.from(e.target.selectedOptions, option => Number(option.value));
@@ -428,7 +437,7 @@ useEffect(() => {
           <label className="text-xs text-gray-500">Selected Subject Offerings</label>
           <div className="mt-2 p-2 border border-gray-300 rounded-md min-h-16">
             {selectedSubjectOfferings.length > 0 ? (
-              <ul className="text-sm text-gray-600">
+              <ul className="text-sm text-gray-400">
                 {selectedSubjectOfferings.map((id: number) => {
                   const so = subjectOfferings.find((s: any) => s.id === id);
                   return (
@@ -482,7 +491,7 @@ useEffect(() => {
       {/* Submit button with loading state */}
       <button 
         type="submit" 
-        className="bg-blue-400 text-white p-2 rounded-md disabled:opacity-50"
+        className="bg-[#40e0d0] text-gray-900 p-2 rounded-md disabled:opacity-50"
         disabled={isSubmitting}
       >
         {isSubmitting 

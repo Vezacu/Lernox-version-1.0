@@ -3,6 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import Link from "next/link";
 import DropdownMenu from "@/components/dropdownMenu";
+
 const menuItems = [
   {
     title: "MENU",
@@ -81,7 +82,7 @@ const menuItems = [
       },
       {
         icon: "/coursecatalog.png",
-        label: "Available Subjects",
+        label: "Subjects Offering",
         href: "/list/subjectofferings",
         visible: ["admin"],
       },

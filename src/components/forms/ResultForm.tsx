@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+import '@/components/cssfile/menuPages.css';
 
 interface Student {
   id: string;
@@ -262,9 +263,9 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
   };
 
   return (
-    <div className="p-4">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Enter Results</h2>
+    <div className="p-4 resultIDpage">
+      <div className="flex justify-between items-center mb-4 ">
+        <h2 className="text-xl  font-semibold">Enter Results</h2>
         <div className="flex gap-2">
           <button
             type="button"
@@ -293,7 +294,7 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
         <form onSubmit={handleSubmit}>
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
-              <thead className="bg-gray-100">
+              <thead className="bg-gray-100 resultIDpage">
                 <tr>
                   <th className="p-2 text-left border">Subject Name</th>
                   <th className="p-2 text-center border">Internal (20)</th>
@@ -317,14 +318,14 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
                     subjectAttendanceData.score;
 
                   return (
-                    <tr key={subject.id} className="hover:bg-gray-50">
+                    <tr key={subject.id} className="hover:bg-gray-30 ">
                       <td className="p-2 border">{subject.name}</td>
                       <td className="p-2 border">
                         <input
                           type="number"
                           value={studentScores.internal}
                           onChange={(e) => handleInputChange(subject.id.toString(), 'internal', e.target.value)}
-                          className="w-full p-1 text-center border rounded"
+                          className="w-full p-1 text-center border rounded text-black"
                           min="0"
                           max="20"
                         />
@@ -334,7 +335,7 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
                           type="number"
                           value={studentScores.external}
                           onChange={(e) => handleInputChange(subject.id.toString(), 'external', e.target.value)}
-                          className="w-full p-1 text-center border rounded"
+                          className="w-full p-1 text-center border rounded text-black"
                           min="0"
                           max="70"
                         />
@@ -367,7 +368,7 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
           <div className="mt-4 flex justify-end">
             <button
               type="submit"
-              className="px-4 py-2 bg-[#40e0d0] text-white rounded-md hover:bg-gray-600"
+              className="px-4 py-2 bg-[#40e0d0] text-black rounded-md hover:bg-gray-600"
             >
               Save Results
             </button>

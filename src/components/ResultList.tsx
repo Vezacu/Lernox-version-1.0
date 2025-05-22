@@ -93,7 +93,7 @@ const ResultList = ({ data, subjects, ...props }: ResultListProps) => {
       {
         header: "Actions",
         accessor: "action",
-        className: "text-right pr-8"
+        className: "text-right pr-20"
       },
     ] : []),
   ];
@@ -117,7 +117,7 @@ const ResultList = ({ data, subjects, ...props }: ResultListProps) => {
     return (
       <tr
         key={item.id}
-        className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
+        className="border-b text-sm border-gray-200 hover:bg-[#a8edea] darkHoverList"
       >
         <td className="py-4 pl-4 pr-8">
           <span className="font-semibold">{item.name} {item.surname}</span>
@@ -129,16 +129,16 @@ const ResultList = ({ data, subjects, ...props }: ResultListProps) => {
             <div className="flex items-center justify-end space-x-3">
               <button
                 onClick={() => handleAddScore(item)}
-                className="bg-[#08FF08] px-4 py-2 rounded-md hover:bg-green-500 transition-colors"
+                className="bg-[#08FF08] text-black px-4 py-2 rounded-md hover:bg-green-500 transition-colors"
               >
                 Add Score
               </button>
               <Link
                 href={`/list/results/${item.id}`}
-                className="bg-[#40e0d0]  px-4 py-2 rounded-md hover:bg-gray-400 transition-colors"
+                className="bg-[#40e0d0] text-black px-4 py-2 rounded-md hover:bg-gray-400 transition-colors"
               >
                 View Results
-              </Link>
+              </Link> 
             </div>
           </td>
         )}
@@ -147,7 +147,7 @@ const ResultList = ({ data, subjects, ...props }: ResultListProps) => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
+    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0 resultpage">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-lg font-semibold">Student Results</h1>
         <div className="flex items-center gap-4">
@@ -164,7 +164,7 @@ const ResultList = ({ data, subjects, ...props }: ResultListProps) => {
 
       {showResultForm && selectedStudent && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-          <div className="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+          <div className="bg-gray-800 rounded-lg p-2 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
             <ResultForm
               students={[selectedStudent as any]} // Cast to any to resolve type mismatch with Student type
               existingResults={data.find(s => s.id === selectedStudent.id)?.results || []}

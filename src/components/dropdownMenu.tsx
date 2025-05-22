@@ -31,7 +31,7 @@ const DropdownMenu = ({
 
       {/* Dropdown Menu */}
       {isDropdownOpen && (
-        <div className="dropdown-menu">
+        <div className="dropdown-menu max-h-[80vh] overflow-y-auto">
           {menuItems.map((i) => (
             <div className="flex flex-col gap-1" key={i.title}>
               {/* Show title on all screens */}
@@ -44,7 +44,7 @@ const DropdownMenu = ({
                     <Link
                       href={item.href}
                       key={item.label}
-                      className="flex items-center gap-4 py-2.5 md:px-2 rounded-md hover:bg-black hover:text-white menuhover"
+                      className="flex items-center gap-2 py-2.5 md:px-2.5 rounded-md hover:bg-black hover:text-white menuhover"
                     >
                       {/* Icon */}
                       <Image

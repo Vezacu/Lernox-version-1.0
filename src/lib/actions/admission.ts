@@ -106,7 +106,7 @@ export async function createAdmission(prevState: any, formData: FormData) {
 
     // Create payment record if screenshot was provided
     if (paymentScreenshotUrl) {
-      const amount = 100; // Default amount
+      const amount = 500; // Default amount
       await prisma.payment.create({
         data: {
           admissionId: newAdmission.id,
@@ -155,7 +155,7 @@ export async function createAdmission(prevState: any, formData: FormData) {
         // Continue with the process even if token creation fails
       }
 
-      // Send verification email to parent
+      // Send verification email to parent 
       try {
         await sendVerificationEmail(
           data.parentEmail,

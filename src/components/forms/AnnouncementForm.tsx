@@ -9,7 +9,7 @@ import { createAnnouncement, updateAnnouncement } from "@/lib/actions";
 import { useFormState } from "react-dom";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-
+import '@/components/cssfile/menuPages.css';
 
 
 const AnnouncementForm = ({
@@ -113,33 +113,34 @@ useEffect(() => {
   }, [state,router, type, setOpen]);
 
   return (
-    <form className="flex flex-col gap-8" onSubmit={onSubmit}>
+    <form className="flex flex-col  gap-8 " onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
         {type === "create"
-          ? "Create a new announcement"
-          : "Update the announcement"}
+          ? ""
+          : ""}
       </h1>
-      <span className="text-xs text-gray-400 font-medium">
+      <span className="text-xs text-gray-400 font-medium ">
         Authentication Information
       </span>
       <div className="flex flex-col gap-6">
         <InputField
           label="Title"
           name="title"
+          className="text-black"
           defaultValue={data?.title}
           register={register}
           error={errors?.title}
         />
         <div className="w-full">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-500 mb-1 ">
             Description
           </label>
-          <div className="relative">
+          <div className="relative text-black">
             <textarea
               {...register("description")}
               defaultValue={data?.description}
               rows={10}
-              className="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 resize-y"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 resize-y "
               placeholder="Enter detailed announcement description..."
               style={{ minHeight: '200px' }}
             />
@@ -154,6 +155,7 @@ useEffect(() => {
         <InputField
           label="Start Date"
           name="startDate"
+          className="text-black"
           defaultValue={data?.startDate}
           register={register}
           error={errors?.startDate}
@@ -162,6 +164,7 @@ useEffect(() => {
         <InputField
           label="End Date"
           name="endDate"
+          className="text-black"
           defaultValue={data?.endDate}
           register={register}
           error={errors?.endDate}
@@ -185,17 +188,17 @@ useEffect(() => {
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          className="px-4 py-2 bg-gray-300 text-gray-900 p-2 rounded-md disabled:opacity-50 p-4"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={loading}
-          className={`px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
+          className={`bg-[#40e0d0] text-gray-900 p-2 rounded-md disabled:opacity-50 p-4 ${
             loading ? "opacity-50" : ""
           }`}
-        >
+        > 
           {loading ? "Submitting..." : type === "create" ? "Create" : "Update"}
         </button>
       </div>

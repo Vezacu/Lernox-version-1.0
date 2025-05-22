@@ -75,12 +75,13 @@ const SubjectForm = ({
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4">
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create New Subject" : "Update Subject"}
+        {type === "create" ? "" : ""}
       </h1>
 
       <InputField
         label="Subject Name"
         name="name"
+        className="text-black"
         register={register}
         error={errors.name}
       />
@@ -88,7 +89,7 @@ const SubjectForm = ({
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`bg-blue-400 text-white p-2 rounded-md disabled:opacity-50" 
+        className={`bg-[#40e0d0] text-gray-900 p-2 rounded-md disabled:opacity-50" 
           ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
       >
         {isSubmitting 

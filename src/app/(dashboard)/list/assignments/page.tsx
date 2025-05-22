@@ -11,6 +11,7 @@ import { redirect } from "next/navigation";
 import { auth } from "@clerk/nextjs/server";
 import InteractiveRow from "@/components/InteractiveRow";
 import { format } from "date-fns";
+import '@/components/cssfile/menuPages.css';
 
 // Original assignment type from database
 type AssignmentData = Assignment & {
@@ -163,7 +164,7 @@ const AssignmentListPage = async ({
   // Modify the renderRow function to show view button for students
   const renderRow = (assignment: AssignmentData) => {
     return (
-      <tr className="border-b border-gray-200 hover:bg-gray-50" key={assignment.id}>
+      <tr className="border-b border-gray-200 enrollmenthover" key={assignment.id}>
         <td className="p-3">{assignment.title}</td>
         <td className="p-3">{assignment.course?.name || "N/A"}</td>
         <td className="p-3">{assignment.semester ? `Semester ${assignment.semester.number}` : "N/A"}</td>
@@ -201,7 +202,7 @@ const AssignmentListPage = async ({
 
   // Update the return JSX to show/hide create button based on role
   return (
-    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
+    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0 assignmentpage">
       {/* TOP */}
       <div className="flex items-center justify-between">
         <h1 className="hidden md:block text-lg font-semibold">
@@ -210,12 +211,7 @@ const AssignmentListPage = async ({
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-              <Image src="/filter.png" alt="" width={14} height={14} />
-            </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-              <Image src="/sort.png" alt="" width={14} height={14} />
-            </button>
+            
             {(role === "admin" || role === "teacher") && (
               <FormContainer 
                 table="assignment" 

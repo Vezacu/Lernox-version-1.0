@@ -29,7 +29,7 @@ const LandingPage: React.FC = () => {
             </div>
           )} 
           <div className="logo-container">
-            <Image src="/foxlogo.png" alt="LERNOX Logo" width={40} height={40} />
+            <Image src="/lernoxlogo.png" alt="LERNOX Logo" width={40} height={40} />
             <span className="logo-text text-black">LERNOX</span>
           </div>
         </div>

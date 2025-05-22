@@ -67,7 +67,7 @@
 .dark-mode .rbc-time-gutter.rbc-time-column .rbc-timeslot-group { /*Time column in bigCalendar*/
   padding: 0px 20px !important;
   background-color: rgba(0, 0, 0, 0.09) !important;
-  color: #000000 !important;
+ 
 }
 .rbc-timeslot-group { /*WorkWeek Body in bigCalendar*/
   background-color: rgba(255, 255, 255, 0.2) !important;
@@ -91,32 +91,32 @@
 }
 
 .rbc-event:nth-child(1) {
-  background-color: #ffede2 !important;
+  background-color: #793f1a !important;
 }
 .rbc-event:nth-child(2) {
-  background-color: #fefce8 !important;
+  background-color: #b1a311 !important;
 }
 .rbc-event:nth-child(3) {
-  background-color: #f4fff1 !important;
+  background-color: #297514 !important;
 }
 .rbc-event:nth-child(4) {
-  background-color: #fdf2fb !important;
+  background-color: #b61598 !important;
 }
 .rbc-event:nth-child(5) {
-  background-color: #e2f8ff !important;
+  background-color: #1288ac !important;
 }
 .rbc-event:nth-child(6) {
-  background-color: #fefce8 !important;
+  background-color: #e4d852 !important;
 }
 .rbc-event:nth-child(7) {
-  background-color: #f2f1ff !important;
+  background-color: #2e2794 !important;
 }
 .rbc-event:nth-child(8) {
-  background-color: #fdf2fb !important;
+  background-color: #eb64d2 !important;
 }
 
 .rbc-event-label{
-  color: gray !important;
+  color: rgb(247, 247, 247) !important;
   margin-bottom: 5px;
 }
 
@@ -232,19 +232,12 @@ body.dark-mode .EventCalendarbg{
 .logo{
     width: 55px;
     height: 45px;
-    background-image: url('/logo.png');
+    background-image: url('/lernoxlogo.png');
     background-size: contain; /* Ensures the image fits within the specified dimensions without distortion */
     background-repeat: no-repeat; /* Prevents the image from repeating */
     background-position: center; /* Centers the image within the div */
 }
-.dark-mode .logo {
-  width: 25px;
-    height: 25px;
-  background-image:url('/logo.png');
-  background-size: contain; /* Ensures the image fits within the specified dimensions without distortion */
-  background-repeat: no-repeat; /* Prevents the image from repeating */
-  background-position: center;
-}
+
 
 .dark-mode .bloodlogo{
   filter: invert(100%) sepia(0%) saturate(7466%) hue-rotate(296deg) brightness(116%) contrast(100%);

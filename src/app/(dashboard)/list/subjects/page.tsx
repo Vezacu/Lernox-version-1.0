@@ -8,6 +8,7 @@ import { ITEM_PER_PAGE } from "@/lib/settings";
 import { auth } from "@clerk/nextjs/server";
 import { Prisma, Subject, Teacher } from "@prisma/client";
 import Image from "next/image";
+import '@/components/cssfile/menuPages.css';
 
 type SubjectList = Subject & { teachers: Teacher[] }
 
@@ -42,7 +43,7 @@ const SubjectsPage = async ({ searchParams }: {
   ];
 
   const renderRow = (item: any) => (
-    <tr key={item.id} className="border-b border-gray-200">
+    <tr key={item.id} className="border-b text-sm border-gray-200 hover:bg-[#a8edea] darkHoverList">
       <td className="p-4">{item.name}</td>
       <td>
         <div className="flex items-center gap-2">
@@ -71,7 +72,7 @@ const SubjectsPage = async ({ searchParams }: {
   ]);
 
   return (
-    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
+    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0 subjectpage">
       <div className="flex items-center justify-between">
         <h1 className="text-lg font-semibold">Subjects</h1>
         <div className="flex items-center gap-4">

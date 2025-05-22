@@ -171,7 +171,7 @@ const LessonFilters = ({ courses, semesters, lessons }: LessonFiltersProps) => {
     <div className="flex flex-wrap gap-2 md:gap-4 mb-6 items-center">
       {/* Course Filter */}
       <select
-        className="p-2 border rounded-md text-sm flex-1 min-w-[120px] max-w-[180px]"
+        className="p-2 border rounded-md text-sm text-black flex-1 min-w-[120px] max-w-[180px] filterbg"
         value={currentCourseId}
         onChange={handleCourseChange}
       >
@@ -185,7 +185,7 @@ const LessonFilters = ({ courses, semesters, lessons }: LessonFiltersProps) => {
 
       {/* Semester Filter */}
       <select
-        className="p-2 border rounded-md text-sm flex-1 min-w-[120px] max-w-[180px]"
+        className="p-2 border rounded-md text-sm text-black flex-1 min-w-[120px] max-w-[180px] filterbg"
         value={currentSemesterId}
         onChange={handleSemesterChange}
         disabled={!currentCourseId}
@@ -200,7 +200,7 @@ const LessonFilters = ({ courses, semesters, lessons }: LessonFiltersProps) => {
 
       {/* Day Filter */}
       <select
-        className="p-2 border rounded-md text-sm flex-1 min-w-[120px] max-w-[180px]"
+        className="p-2 border rounded-md text-sm text-black flex-1 min-w-[120px] max-w-[180px] filterbg"
         value={currentDay}
         onChange={handleDayChange}
       >
@@ -215,7 +215,7 @@ const LessonFilters = ({ courses, semesters, lessons }: LessonFiltersProps) => {
       {/* PDF Export Button */}
       <button
         onClick={exportToPDF}
-        className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-md text-sm ml-auto"
+        className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200  px-4 py-2 rounded-md text-sm ml-auto filterbg"
       >
         <Image src="/download.png" width={16} height={16} alt="Export" />
         <span className="hidden sm:inline">Export PDF</span>

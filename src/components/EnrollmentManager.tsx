@@ -402,7 +402,7 @@ const EnrollmentManager = ({
   );
 
   return (
-    <div className="bg-white p-4 rounded-md shadow-sm">
+    <div className="bg-white p-4 rounded-md shadow-sm enrollmentpage">
       {/* Confirmation Dialog */}
       {showConfirmDialog && confirmAction && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -415,7 +415,7 @@ const EnrollmentManager = ({
                   setShowConfirmDialog(false);
                   setConfirmAction(null);
                 }}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-lamaPurpleLight"
               >
                 Cancel
               </button>
@@ -436,7 +436,7 @@ const EnrollmentManager = ({
         <div className="flex gap-2">
           <button
             onClick={() => setView("list")}
-            className={`px-3 py-2 rounded ${
+            className={`px-3 py-2 text-gray-700 rounded ${
               view === "list" ? "bg-[#40e0d0]" : "bg-gray-200"
             }`}
           >
@@ -444,7 +444,7 @@ const EnrollmentManager = ({
           </button>
           <button
             onClick={() => setView("create")}
-            className={`px-3 py-2 rounded ${
+            className={`px-3 py-2 text-gray-700 rounded ${
               view === "create" ? "bg-[#40e0d0]" : "bg-gray-200"
             }`}
           >
@@ -456,13 +456,13 @@ const EnrollmentManager = ({
       {/* Filters - shown in all views */}
       <div className="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-500 mb-1">
             Course
           </label>
           <select
             value={courseId}
             onChange={(e) => handleFilterChange("courseId", e.target.value)}
-            className="w-full border border-gray-300 rounded-md p-2"
+            className="w-full border border-gray-300 rounded-md p-2 text-black filterbg"
           >
             <option value="">All Courses</option>
             {courses.map((course) => (
@@ -474,13 +474,13 @@ const EnrollmentManager = ({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-500 mb-1 ">
             Semester
           </label>
           <select
             value={semesterId}
             onChange={(e) => handleFilterChange("semesterId", e.target.value)}
-            className="w-full border border-gray-300 rounded-md p-2"
+            className="w-full border border-gray-300 rounded-md p-2 text-black filterbg"
             disabled={!courseId}
           >
             <option value="">All Semesters</option>
@@ -493,13 +493,13 @@ const EnrollmentManager = ({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-500 mb-1">
             Student
           </label>
           <select
             value={studentId}
             onChange={(e) => handleFilterChange("studentId", e.target.value)}
-            className="w-full border border-gray-300 rounded-md p-2"
+            className="w-full border border-gray-300 rounded-md p-2 text-black filterbg"
           >
             <option value="">All Students</option>
             {filteredStudents.map((student) => (
@@ -547,7 +547,7 @@ const EnrollmentManager = ({
           
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
-              <thead className="bg-gray-100">
+              <thead className="bg-gray-100 enrollmentpage">
                 <tr>
                   <th className="p-2 text-left border">Student</th>
                   <th className="p-2 text-left border">Course</th>
@@ -560,7 +560,7 @@ const EnrollmentManager = ({
               <tbody>
                 {filteredEnrollments.length > 0 ? (
                   filteredEnrollments.map((enrollment) => (
-                    <tr key={enrollment.id} className="hover:bg-gray-50">
+                    <tr key={enrollment.id} className="border-b text-sm border-gray-200 hover:bg-[#a8edea] darkHoverList">
                       <td className="p-2 border">
                         {enrollment.student.surname}, {enrollment.student.name}
                       </td>
@@ -625,7 +625,7 @@ const EnrollmentManager = ({
                   filteredStudents.map((student) => (
                     <div 
                       key={student.id}
-                      className="flex items-center p-2 hover:bg-gray-50 border-b"
+                      className="flex items-center p-2 hover:bg-gray-50 border-b enrollmenthover"
                     >
                       <input
                         type="checkbox"
@@ -670,7 +670,7 @@ const EnrollmentManager = ({
                   filteredSubjectOfferings.map((so) => (
                     <div 
                       key={so.id}
-                      className="flex items-center p-2 hover:bg-gray-50 border-b"
+                      className="flex items-center p-2 hover:bg-gray-50 border-b enrollmenthover"
                     >
                       <input
                         type="checkbox"
@@ -696,7 +696,7 @@ const EnrollmentManager = ({
             </div>
           </div>
 
-          <div className="bg-blue-50 p-4 rounded-md">
+          <div className="bg-blue-50 p-4 rounded-md enrollmentpage">
             <p className="text-sm text-blue-700">
               This will create {selectedStudents.length * selectedSubjectOfferings.length} enrollment(s).
               Each selected student will be enrolled in all selected subject offerings.

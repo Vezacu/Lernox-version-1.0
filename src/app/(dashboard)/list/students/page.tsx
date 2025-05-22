@@ -9,6 +9,7 @@ import { auth } from "@clerk/nextjs/server";
 import { Prisma, Student, Course, Semester } from "@prisma/client"; //CT
 import Image from "next/image";
 import Link from "next/link";
+import '@/components/cssfile/menuPages.css';
 
 type StudentList = Student & { course: Course; currentSemester: Semester }; //CT
 //CT
@@ -127,7 +128,7 @@ const StudentListPage = async ({
   const renderRow = (item: StudentList) => (
     <tr
       key={item.id}
-      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
+      className="border-b text-sm border-gray-200 hover:bg-[#a8edea] darkHoverList"
     >
       <td className="flex items-center gap-4 p-4">
         <Image
@@ -187,7 +188,7 @@ const StudentListPage = async ({
   ]);
 
   return (
-    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
+    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0 studentpage">
       {/* TOP */}
       <div className="flex items-center justify-between">
         <h1 className="hidden md:block text-lg font-semibold">All Students</h1>

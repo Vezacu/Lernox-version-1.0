@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import EnrollmentManager from "@/components/EnrollmentManager";
 import { z } from "zod";
 import { enrollStudent, batchEnroll, removeEnrollment } from "@/lib/actions";
-
+import '@/components/cssfile/menuPages.css';
 // Enrollment form schema
 const enrollmentFormSchema = z.object({
   studentId: z.string().min(1, "Student is required"),

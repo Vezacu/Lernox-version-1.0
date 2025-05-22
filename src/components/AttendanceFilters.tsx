@@ -279,7 +279,7 @@ const AttendanceFilters = ({ courses, semesters, lessons }: AttendanceFiltersPro
     <div className="flex flex-wrap gap-2 md:gap-4 mb-6 items-center">
       {/* Course Filter */}
       <select
-        className="p-2 border rounded-md text-sm flex-1 min-w-[120px] max-w-[180px]"
+        className="p-2 border rounded-md text-sm flex-1 min-w-[120px] max-w-[180px] text-black"
         value={currentCourseId}
         onChange={handleCourseChange}
       >
@@ -293,7 +293,7 @@ const AttendanceFilters = ({ courses, semesters, lessons }: AttendanceFiltersPro
 
       {/* Semester Filter */}
       <select
-        className="p-2 border rounded-md text-sm flex-1 min-w-[120px] max-w-[180px]"
+        className="p-2 border rounded-md text-sm flex-1 min-w-[120px] max-w-[180px] text-black"
         value={currentSemesterId}
         onChange={handleSemesterChange}
         disabled={!currentCourseId}
@@ -307,7 +307,7 @@ const AttendanceFilters = ({ courses, semesters, lessons }: AttendanceFiltersPro
       </select>
 
       {/* Date Picker - Single date selection that auto-sets weekday */}
-      <div className="flex flex-1 min-w-[140px] max-w-[180px]">
+      <div className="flex flex-1 min-w-[140px] max-w-[180px] text-black">
         <input
           type="date"
           className="p-2 border rounded-md text-sm flex-grow"
@@ -317,14 +317,14 @@ const AttendanceFilters = ({ courses, semesters, lessons }: AttendanceFiltersPro
       </div>
 
       {/* Display selected weekday (read-only) */}
-      <div className="flex flex-1 min-w-[120px] max-w-[180px] p-2 border rounded-md text-sm bg-gray-50">
+      <div className="flex flex-1 min-w-[120px] max-w-[180px] p-2 border rounded-md text-sm bg-gray-50 text-black">
         <span className="text-gray-500 mr-2">Day:</span>
         <span className="font-medium">{currentWeekday}</span>
       </div>
 
       {/* Lesson Filter */}
       <select
-        className="p-2 border rounded-md text-sm flex-1 min-w-[180px] max-w-[240px]"
+        className="p-2 border rounded-md text-black flex-1 min-w-[180px] max-w-[240px]"
         value={currentLessonId}
         onChange={handleLessonChange}
         disabled={!currentSemesterId}

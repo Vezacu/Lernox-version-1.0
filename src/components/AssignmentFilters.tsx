@@ -117,7 +117,7 @@ const AssignmentFilters = ({ courses, semesters }: AssignmentFiltersProps) => {
       <select
         onChange={handleCourseChange}
         defaultValue={currentCourseId}
-        className="p-2 border border-gray-300 rounded-md"
+        className="p-2 border border-gray-300 rounded-md  text-black filterbg"
       >
         <option value="">All Courses</option>
         {courses.map((course) => (
@@ -131,7 +131,7 @@ const AssignmentFilters = ({ courses, semesters }: AssignmentFiltersProps) => {
       <select
         onChange={handleSemesterChange}
         value={currentSemesterId}
-        className="p-2 border border-gray-300 rounded-md"
+        className="p-2 border border-gray-300 rounded-md text-black filterbg" 
       >
         <option value="">All Semesters</option>
         {filteredSemesters.map((semester) => (
@@ -145,7 +145,7 @@ const AssignmentFilters = ({ courses, semesters }: AssignmentFiltersProps) => {
       <select
         onChange={handleStatusChange}
         defaultValue={currentStatus}
-        className="p-2 border border-gray-300 rounded-md"
+        className="p-2 border border-gray-300 rounded-md text-black filterbg"
       >
         <option value="">All Status</option>
         <option value="upcoming">Upcoming</option>
@@ -157,7 +157,7 @@ const AssignmentFilters = ({ courses, semesters }: AssignmentFiltersProps) => {
       <select
         onChange={handleSortChange}
         defaultValue={searchParams.get("sort") || ""}
-        className="p-2 border border-gray-300 rounded-md"
+        className="p-2 border border-gray-300 rounded-md text-black filterbg"
       >
         <option value="">Sort By</option>
         <option value="asc">A to Z</option>

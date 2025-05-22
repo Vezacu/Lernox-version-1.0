@@ -8,6 +8,7 @@ import { auth } from "@clerk/nextjs/server";
 import { Prisma, Subject, Course, Semester, Teacher } from "@prisma/client";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import '@/components/cssfile/menuPages.css';
 
 type SubjectOfferingList = {
   id: number;
@@ -89,7 +90,7 @@ const SubjectOfferingsPage = async ({
   const renderRow = (item: SubjectOfferingList) => (
     <tr
       key={item.id}
-      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
+      className="border-b text-sm border-gray-200 hover:bg-[#a8edea] darkHoverList"
     >
       <td className="p-4">{item.subject.name}</td>
       <td className="hidden md:table-cell">{item.semester.course.name}</td>
@@ -131,7 +132,7 @@ const SubjectOfferingsPage = async ({
   ]);
 
   return (
-    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
+    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0 subjectOfferingpage">
       <div className="flex items-center justify-between">
         <h1 className="hidden md:block text-lg font-semibold">
           Subject Offerings

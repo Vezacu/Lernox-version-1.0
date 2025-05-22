@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma";
 import { ITEM_PER_PAGE } from "@/lib/settings";
 import ResultList from "@/components/ResultList";
 import { Prisma } from "@prisma/client";
+import '@/components/cssfile/menuPages.css';
 
 export default async function ResultsPage({
   searchParams,

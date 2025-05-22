@@ -76,7 +76,7 @@ const ParentForm = ({
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new Parent" : "Update the Parent"}
+        {type === "create" ? "" : ""}
       </h1>
       <span className="text-xs text-gray-400 font-medium">
         Authentication Information
@@ -92,6 +92,7 @@ const ParentForm = ({
         <InputField
           label="Email"
           name="email"
+          className="text-black" 
           defaultValue={data?.email}
           register={register}
           error={errors?.email}
@@ -100,6 +101,7 @@ const ParentForm = ({
           label="Password"
           name="password"
           type="password"
+          className="text-black" 
           defaultValue={data?.password}
           register={register}
           error={errors?.password}
@@ -113,6 +115,7 @@ const ParentForm = ({
         <InputField
           label="First Name"
           name="name"
+          className="text-black" 
           defaultValue={data?.name}
           register={register}
           error={errors.name}
@@ -120,6 +123,7 @@ const ParentForm = ({
         <InputField
           label="Last Name"
           name="surname"
+          className="text-black" 
           defaultValue={data?.surname}
           register={register}
           error={errors.surname}
@@ -127,6 +131,7 @@ const ParentForm = ({
         <InputField
           label="Phone"
           name="phone"
+          className="text-black" 
           defaultValue={data?.phone}
           register={register}
           error={errors.phone}
@@ -134,6 +139,7 @@ const ParentForm = ({
         <InputField
           label="Address"
           name="address"
+          className="text-black" 
           defaultValue={data?.address}
           register={register}
           error={errors.address}
@@ -143,7 +149,7 @@ const ParentForm = ({
       {state.error && (
         <span className="text-red-500">Something went wrong!</span>
       )}
-      <button className="bg-blue-400 text-white p-2 rounded-md">
+      <button className="bg-[#40e0d0] text-gray-900 p-2 rounded-md">
         {type === "create" ? "Create" : "Update"}
       </button>
       

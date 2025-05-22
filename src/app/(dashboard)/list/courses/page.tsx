@@ -7,6 +7,7 @@ import { ITEM_PER_PAGE } from "@/lib/settings";
 import { auth } from "@clerk/nextjs/server";
 import { Course, Prisma } from "@prisma/client";
 import Image from "next/image";
+import '@/components/cssfile/menuPages.css';
 
 type CourseList = Course & {
   semesters: { number: number }[];  // Change this to match Prisma schema
@@ -85,7 +86,7 @@ const CourseListPage = async ({
     return (
       <tr
         key={item.id}
-        className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
+        className="border-b text-sm border-gray-200 hover:bg-[#a8edea] darkHoverList"
       >
         <td className="flex items-center gap-4 p-4">{item.name}</td>
         <td className="hidden md:table-cell">{item.duration}</td>
@@ -95,7 +96,7 @@ const CourseListPage = async ({
               <>
                 <span 
                   key={semesterNumbers[0]}
-                  className="px-2 py-1 bg-[#08FF08]  text-black-800 rounded-full text-xs"
+                  className="px-2 py-1 bg-[#08FF08]  text-black rounded-full text-xs"
                 >
                   Sem {semesterNumbers[0]}
                 </span>
@@ -104,7 +105,7 @@ const CourseListPage = async ({
                     <span className="px-2 py-1 text-xs"> - </span>
                     <span 
                       key={semesterNumbers[1]}
-                      className="px-2 py-1 bg-[#08FF08] text-black-800 rounded-full text-xs"
+                      className="px-2 py-1 bg-[#08FF08] text-black rounded-full text-xs"
                     >
                       Sem {semesterNumbers[1]}
                     </span>
@@ -145,18 +146,13 @@ const CourseListPage = async ({
   ]);
 
   return (
-    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
+    <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0 coursepage">
       <div className="flex items-center justify-between">
         <h1 className="hidden md:block text-lg font-semibold">All Courses</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-              <Image src="/filter.png" alt="" width={14} height={14} />
-            </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-              <Image src="/sort.png" alt="" width={14} height={14} />
-            </button>
+            
             {role === "admin" && <FormContainer table="course" type="create" />}
           </div>
         </div>

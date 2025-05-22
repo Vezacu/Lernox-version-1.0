@@ -69,7 +69,7 @@ export default function AssignmentForm({
           : createAssignment(prevState, formData));
         
         if (result.success) {
-          toast.success(type === "update" ? 'Assignment updated!' : 'Assignment created!');
+          toast.success(type === "update" ? '' : '');
           router.refresh();
           setOpen(false);
         } else if (result.error) {
@@ -158,9 +158,10 @@ export default function AssignmentForm({
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded text-black"
           disabled={isLoading}
           placeholder="Assignment title"
+          
         />
       </div>
       
@@ -169,7 +170,7 @@ export default function AssignmentForm({
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded text-black"
           rows={4}
           disabled={isLoading}
           placeholder="Assignment description"
@@ -178,11 +179,11 @@ export default function AssignmentForm({
       
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium mb-1">Course</label>
+          <label className="block text-sm font-medium mb-1 text-black">Course</label>
           <select
             value={courseId}
             onChange={handleCourseChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
             disabled={isLoading}
           >
             <option value="">Select Course</option>
@@ -195,11 +196,11 @@ export default function AssignmentForm({
         </div>
         
         <div>
-          <label className="block text-sm font-medium mb-1">Semester</label>
+          <label className="block text-sm font-medium mb-1 ">Semester</label>
           <select
             value={semesterId}
             onChange={(e) => setSemesterId(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
             disabled={isLoading || !courseId || filteredSemesters.length === 0}
           >
             <option value="">Select Semester</option>
@@ -219,7 +220,7 @@ export default function AssignmentForm({
             type="date"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
             disabled={isLoading}
           />
         </div>
@@ -230,7 +231,7 @@ export default function AssignmentForm({
             type="date"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded text-black"
             disabled={isLoading}
           />
         </div>
@@ -240,7 +241,7 @@ export default function AssignmentForm({
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="px-4 py-2 border rounded"
+          className="px-4 py-2 border rounded bg-white text-black" 
           disabled={isLoading}
         >
           Cancel
@@ -248,7 +249,7 @@ export default function AssignmentForm({
         
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded"
+          className="px-4 py-2 bg-[#40e0d0] text-gray-900"
           disabled={isLoading}
         >
           {isLoading ? "Saving..." : type === "update" ? "Update" : "Create"}

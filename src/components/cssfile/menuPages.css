@@ -34,7 +34,169 @@
 .teacherspage{
     background-color: rgba(255, 255, 255, 0.3);
 }
+.subjectOfferingpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.resultpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.pendingpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.enrollmentpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.coursepage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.attendancepage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.teacherIdpage{
+    background-color: rgba(104, 120, 173, 0.3);
+}
+.attendancetable{
+     background-color: rgba(255, 255, 255, 0.3);
+}
+.tableStudent{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.profilepage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.profilecard{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+ .createUpdateform{
+    background-color: rgba(255, 255, 255, 2);
+}
+.pendingIDpage{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
 /*..................................*/
+/*dark mode*/
+.dark-mode .pendingBg{
+    background-color: rgba(15, 167, 36, 0.1);
+}
+.dark-mode .attendancepage{
+    background-color: rgba(15, 167, 36, 0.1);
+}
+.dark-mode .announcementpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .assignmentpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .classpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .eventpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .exampage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .lessonpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .parentpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .resultpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .studentpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .subjectpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .subjectOfferingpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .pendingpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .pendingpage2{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .enrollmentpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .coursepage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .enrollmenthover:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.dark-mode .teacherIdpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .teacherIdsmallCard{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+.dark-mode .attendancepage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .attendanceSellectedMonthbg{
+background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .attendanceSellectedMonth{
+color: white;
+}
+.dark-mode .darkHover:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .profilepage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .profilecard{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .createUpdateform {
+    background-color: rgba(30, 30, 40, 0.95); /* Dark semi-transparent background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px); /* Frosted glass effect */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    color: #ffffff; /* White text */
+}
+.dark-mode .input{
+    color: rgb(3, 3, 3);
+}
+.dark-mode .closebtn{
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(64deg) brightness(103%) contrast(106%);
+}
+.dark-mode .pendingIDpage{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .studentIDpageInner{
+    background-color: rgba(255, 255, 255, 0.1);
+}
+.dark-mode .teacherpageIcon{
+    filter: invert(100%) sepia(0%) saturate(7466%) hue-rotate(296deg) brightness(116%) contrast(100%);
+}
+.dark-mode .assignmentView{
+    color: #40e0d0;
+}
+.dark-mode .assignmentViewDes{
+    color: #a0a0a0;
+}
+.dark-mode .resultIDpage{
+     background-color: rgba(30, 30, 40, 0.95); /* Dark semi-transparent background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px); /* Frosted glass effect */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    color: #ffffff; /* White text */
+}
+/*............................................*/
+.filterbg{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.dark-mode .filterbg{
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
 .teacherFormModal {
     position: relative;
     z-index: 1;
@@ -56,3 +218,7 @@
         z-index: 2; /* Ensure this is higher than the blurred background */
 }
   /*..............................*/
+
+ .dark-mode .darkHoverList:hover {
+  background-color: #2a2b2c; /* Tailwind's slate-700 hex code */
+}

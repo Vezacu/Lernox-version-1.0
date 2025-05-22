@@ -1,5 +1,7 @@
 import prisma from "@/lib/prisma";
 import Image from "next/image";
+import '@/components/cssfile/menuPages.css';
+import Link from "next/link";
 
 const ViewPaymentPage = async ({ params }: { params: { id: string } }) => {
   const payment = await prisma.payment.findUnique({
@@ -14,13 +16,20 @@ const ViewPaymentPage = async ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen p-6">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">Student Details</h1>
-      
+    <div className="bg-gray-50 min-h-screen p-6 pendingIDpage">
+    <div className="flex justify-between items-center mb-6">
+      <h1 className="text-2xl font-bold">Student Details</h1>
+      <Link 
+        href="/list/pendings" 
+        className="bg-[#40e0d0] hover:bg-gray-300 px-4 py-2 pr-8 pl-8 rounded-lg text-black"
+      >
+        Back
+      </Link>
+    </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Student Information Card */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h2 className="text-lg font-semibold mb-4 text-gray-700">Student Information</h2>
+        <div className="bg-white p-6 rounded-lg studentIDpageInner">
+          <h2 className="text-lg font-semibold mb-4 text-gray-400">Student Information</h2>
           
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-2">
@@ -68,8 +77,8 @@ const ViewPaymentPage = async ({ params }: { params: { id: string } }) => {
         </div>
         
         {/* Payment Information Card */}
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <h2 className="text-lg font-semibold mb-4 text-gray-700">Payment Information</h2>
+        <div className="bg-white p-6 rounded-lg studentIDpageInner">
+          <h2 className="text-lg font-semibold mb-4 text-gray-400">Payment Information</h2>
           
           <div className="space-y-4">
             <div>

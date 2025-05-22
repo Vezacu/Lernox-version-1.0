@@ -5,6 +5,7 @@ import Image from "next/image";
 import { auth } from "@clerk/nextjs/server";
 import FormContainer from "@/components/FormContainer";
 import Link from "next/link";
+import '@/components/cssfile/menuPages.css';
 
 interface AssignmentPageProps {
   params: {
@@ -75,19 +76,19 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
     }
 
     return (
-      <div className="bg-white p-6 rounded-lg shadow-sm m-4">
+      <div className="bg-white p-6 rounded-lg shadow-sm m-4 assignmentpage">
         <div className="max-w-3xl mx-auto">
           {/* Header with Navigation and Actions */}
           <div className="flex justify-between items-center mb-6">
             <Link
               href="/list/assignments"
-              className="inline-flex items-center text-sm text-blue-600 hover:text-blue-800"
+              className="inline-flex items-center text-sm text-gray-800 hover:text-gray-400 assignmentView"
             >
               ← Back to assignments
             </Link>
             
             {(role === "admin" || role === "teacher") && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 ">
                 <FormContainer 
                   table="assignment" 
                   type="update" 
@@ -106,13 +107,13 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
           {/* Title and Status */}
           <div className="border-b pb-4 mb-6">
             <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-bold text-gray-900">{assignment.title}</h1>
+              <h1 className="text-2xl font-bold ">{assignment.title}</h1>
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusColor}`}>
                 {status}
               </span>
             </div>
             
-            <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
+            <div className="flex items-center gap-4 mt-2 text-sm text-gray-400">
               <span>Start: {format(startDate, 'MMM d, yyyy')}</span>
               <span>•</span>
               <span>Due: {format(dueDate, 'MMM d, yyyy')}</span>
@@ -121,7 +122,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
 
           {/* Content */}
           <div className="prose max-w-none">
-            <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">
+            <p className="text-gray-800 whitespace-pre-wrap leading-relaxed assignmentViewDes">
               {assignment.description}
             </p>
           </div>
@@ -129,7 +130,7 @@ export default async function AssignmentPage({ params }: AssignmentPageProps) {
           {/* Course and Semester Info if available */}
           {(assignment.courseId || assignment.semesterId) && (
             <div className="mt-8 pt-4 border-t">
-              <h2 className="text-sm font-medium text-gray-500 mb-2">Applicable to:</h2>
+              <h2 className="text-sm font-medium text-gray-400 mb-2">Applicable to:</h2>
               <div className="flex gap-4">
                 {assignment.courseId && assignment.course && (
                   <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">

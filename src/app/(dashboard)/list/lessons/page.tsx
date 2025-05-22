@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import LessonFilters from "@/components/LessonFilters";
 import React from "react";
 import CurrentTimeIndicator from "@/components/CurrentTimeIndicator";
+import '@/components/cssfile/menuPages.css';
 
 const daysOrder = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"];
 
@@ -143,10 +144,10 @@ const LessonsPage = async ({
   };
 
   return (
-    <div className="bg-white p-4 md:p-6 rounded-md shadow-sm m-4 mt-0 flex-1">
+    <div className="bg-white p-4 md:p-6 rounded-md shadow-sm m-4 mt-0 flex-1 lessonpage">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-        <h1 className="text-lg font-semibold text-gray-800">College Timetable</h1>
+        <h1 className="text-lg font-semibold ">College Timetable</h1>
         <div className="flex items-center gap-4">
           {role === "admin" && (
             <FormModal 

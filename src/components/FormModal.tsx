@@ -1,4 +1,5 @@
 "use client";
+import '@/components/cssfile/menuPages.css';
 
 import {
 
@@ -64,7 +65,7 @@ const CourseForm = dynamic(() => import("./forms/CourseForm"), {
 });
 const AnnouncementForm = dynamic(() => import("./forms/AnnouncementForm"), {
   loading: () => <h1>Loading...</h1>,
-});
+}); 
 const AssignmentForm = dynamic(() => import("./forms/AssignmentForm"), {
   loading: () => <p className="text-center py-4">Loading form...</p>,
 });
@@ -93,7 +94,7 @@ const forms: {
       relatedData={relatedData}
     />
   ),
-  student: (setOpen, type, data, relatedData) => (
+  student: (setOpen, type, data, relatedData) => ( 
     <StudentForm
       type={type}
       data={data}
@@ -263,25 +264,25 @@ const FormModal = ({
         <>
           {/* Backdrop overlay */}
           <div 
-            className="fixed inset-0 bg-black bg-opacity-60 z-40" 
+            className="fixed inset-0 bg-black bg-opacity-50 z-40" 
             onClick={handleClose}
             aria-hidden="true"
           />
           <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto">
             <div 
-              className="bg-white p-6 rounded-md relative w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%] max-h-[90vh] overflow-y-auto"
+              className="bg-white p-6 rounded-md relative w-[90%] md:w-[70%] lg:w-[60%] xl:w-[50%] 2xl:w-[40%] max-h-[90vh] overflow-y-auto createUpdateform"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="mb-4 flex justify-between items-center">
                 <h2 className="text-xl font-semibold capitalize">
-                  {/* {type} {table} */}
+                  {type} {table}
                 </h2>
                 <button
-                  className="cursor-pointer hover:bg-gray-100 p-1 rounded-full"
+                  className="cursor-pointer  p-1 rounded-full"
                   onClick={handleClose}
                   aria-label="Close form"
                 >
-                  <Image src="/close.png" alt="Close" width={14} height={14} />
+                  <Image src="/close.png" alt="Close" width={14} height={14} className='closebtn'/>
                 </button>
               </div>
               <Form />

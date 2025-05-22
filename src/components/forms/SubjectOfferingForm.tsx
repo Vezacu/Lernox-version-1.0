@@ -104,9 +104,9 @@ const SubjectOfferingForm = ({
   }, [state, type, setOpen, router]);
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-4">
+    <form onSubmit={onSubmit} className="flex flex-col gap-4 ">
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create New Subject Offering" : "Update Subject Offering"}
+        {type === "create" ? "" : ""}
       </h1>
 
       {/* Add hidden input for ID if updating */}
@@ -119,7 +119,7 @@ const SubjectOfferingForm = ({
         <div className="flex flex-col gap-2">
           <label className="text-sm text-gray-600">Course</label>
           <select
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-black"
             onChange={(e) => setSelectedCourseId(e.target.value)}
             value={selectedCourseId}
           >
@@ -140,7 +140,7 @@ const SubjectOfferingForm = ({
           <label className="text-sm text-gray-600">Semester</label>
           <select
             {...register("semesterId")}
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-black"
             disabled={!selectedCourseId}
           >
             <option value="">Select Semester</option>
@@ -158,7 +158,8 @@ const SubjectOfferingForm = ({
         {/* Subject Selection */}
         <div className="flex flex-col gap-2">
           <label className="text-sm text-gray-600">Subject</label>
-          <select {...register("subjectId")} className="p-2 border rounded-md">
+          <select {...register("subjectId")}
+           className="p-2 border rounded-md text-black">
             <option value="">Select Subject</option>
             {subjects.map((subject: any) => (
               <option key={subject.id} value={subject.id}>
@@ -167,14 +168,15 @@ const SubjectOfferingForm = ({
             ))}
           </select>
           {errors.subjectId && (
-            <span className="text-red-500 text-sm">{String(errors.subjectId.message)}</span>
+            <span className="text-red-500 text-sm text-black">{String(errors.subjectId.message)}</span>
           )}
         </div>
 
         {/* Teacher Selection */}
         <div className="flex flex-col gap-2">
           <label className="text-sm text-gray-600">Teacher</label>
-          <select {...register("teacherId")} className="p-2 border rounded-md">
+          <select {...register("teacherId")}
+           className="p-2 border rounded-md text-black">
             <option value="">Select Teacher</option>
             {teachers.map((teacher: any) => (
               <option key={teacher.id} value={teacher.id}>
@@ -198,7 +200,7 @@ const SubjectOfferingForm = ({
         </button>
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+          className="bg-[#40e0d0] text-gray-900 px-4 py-2 rounded-md "
         >
           {type === "create" ? "Create" : "Update"} Subject Offering
         </button>

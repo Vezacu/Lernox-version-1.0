@@ -126,7 +126,7 @@ const CourseForm = ({ type, data, setOpen }: CourseFormProps) => {
   return (
     <form action={handleFormAction} className="flex flex-col gap-8">
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create New Course" : "Update Course"}
+        {type === "create" ? "" : ""}
       </h1>
 
       {data?.id && <input type="hidden" {...register("id")} />}
@@ -135,6 +135,7 @@ const CourseForm = ({ type, data, setOpen }: CourseFormProps) => {
         <InputField
           label="Course Name"
           name="name"
+          className="text-black"
           register={register}
           error={errors.name}
          
@@ -144,6 +145,7 @@ const CourseForm = ({ type, data, setOpen }: CourseFormProps) => {
           label="Duration (Years)"
           name="duration"
           type="number"
+          className="text-black"
           register={register}
           error={errors.duration}
           
@@ -153,6 +155,7 @@ const CourseForm = ({ type, data, setOpen }: CourseFormProps) => {
           label="Number of Semesters"
           name="semesters"
           type="number"
+          className="text-black"
           register={register}
           error={errors.semesters}
         />
@@ -165,7 +168,7 @@ const CourseForm = ({ type, data, setOpen }: CourseFormProps) => {
       <button
         type="submit"
         disabled={loading}
-        className={`bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors
+        className={`bg-[#40e0d0] text-gray-900 px-4 py-2 rounded-md hover:bg-blue-600 transition-colors
           ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
         {loading ? 'Processing...' : type === "create" ? "Create Course" : "Update Course"}

@@ -265,11 +265,11 @@ const LessonForm = ({
 
   return (
     <form 
-      className="flex flex-col gap-6" 
+      className="flex flex-col gap-6 " 
       onSubmit={type === "create" ? onSubmitCreate : onSubmitUpdate}
     >
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create new lesson" : "Update lesson"}
+        {type === "create" ? "" : ""}
       </h1>
       
       {/* Hidden ID field for updates */}
@@ -284,9 +284,9 @@ const LessonForm = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Course Selection */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-xs text-gray-500">Course</label>
+          <label className="text-xs text-gray-400">Course</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             {...(type === "create" ? registerCreate("courseId") : registerUpdate("courseId"))}
             disabled={type === "update"} // Disable in update mode
           >
@@ -309,9 +309,9 @@ const LessonForm = ({
         
         {/* Semester Selection */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-xs text-gray-500">Semester</label>
+          <label className="text-xs text-gray-400">Semester</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             {...(type === "create" ? registerCreate("semesterId") : registerUpdate("semesterId"))}
             disabled={!selectedCourse || type === "update"} // Disable if no course or in update mode
           >
@@ -328,7 +328,7 @@ const LessonForm = ({
             </p>
           )}
           {type === "update" && (
-            <p className="text-xs text-gray-500 mt-1">Semester cannot be changed when updating</p>
+            <p className="text-xs text-gray-400 mt-1">Semester cannot be changed when updating</p>
           )}
         </div>
       </div>
@@ -337,9 +337,9 @@ const LessonForm = ({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Day Selection */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-xs text-gray-500">Day</label>
+          <label className="text-xs text-gray-400">Day</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             {...(type === "create" ? registerCreate("day") : registerUpdate("day"))}
           >
             <option value="MONDAY">Monday</option>
@@ -357,9 +357,9 @@ const LessonForm = ({
         
         {/* Subject Selection */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-xs text-gray-500">Subject</label>
+          <label className="text-xs text-gray-400">Subject</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             {...(type === "create" ? registerCreate("subjectOfferingId") : registerUpdate("subjectOfferingId"))}
             disabled={!selectedSemester}
           >
@@ -380,9 +380,9 @@ const LessonForm = ({
         {/* Status Selection - only for updates */}
         {type === "update" && (
           <div className="flex flex-col gap-2 w-full">
-            <label className="text-xs text-gray-500">Status</label>
+            <label className="text-xs text-gray-400">Status</label>
             <select
-              className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+              className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
               {...registerUpdate("status")}
             >
               <option value="SCHEDULED">Scheduled</option>
@@ -400,10 +400,10 @@ const LessonForm = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Start Time */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-xs text-gray-500">Start Time</label>
+          <label className="text-xs text-gray-400">Start Time</label>
           <input
             type="time"
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             {...(type === "create" ? registerCreate("startTime") : registerUpdate("startTime"))}
             onChange={handleStartTimeChange}
           />
@@ -416,10 +416,10 @@ const LessonForm = ({
         
         {/* End Time */}
         <div className="flex flex-col gap-2 w-full">
-          <label className="text-xs text-gray-500">End Time</label>
+          <label className="text-xs text-gray-400">End Time</label>
           <input
             type="time"
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             {...(type === "create" ? registerCreate("endTime") : registerUpdate("endTime"))}
           />
           {(type === "create" ? errorsCreate.endTime : errorsUpdate.endTime) && (
@@ -445,7 +445,7 @@ const LessonForm = ({
       {/* Submit button */}
       <button
         type="submit"
-        className="bg-blue-400 text-white p-2 rounded-md hover:bg-blue-500 transition-colors mt-4"
+        className="bg-[#40e0d0] text-gray-900 p-2 rounded-md disabled:opacity-50"
         disabled={type === "create" && !selectedSemester}
       >
         {type === "create" ? "Create Lesson" : "Update Lesson"}

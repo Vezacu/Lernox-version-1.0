@@ -107,7 +107,7 @@ const StudentForm = ({
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmit}>
       <h1 className="text-xl font-semibold">
-        {type === "create" ? "Create a new student" : "Update the student"}
+        {type === "create" ? "" : ""}
       </h1>
       <span className="text-xs text-gray-400 font-medium">
         Authentication Information
@@ -116,6 +116,7 @@ const StudentForm = ({
         <InputField
           label="Username"
           name="username"
+          className="text-black"
           defaultValue={data?.username}
           register={register}
           error={errors?.username}
@@ -123,6 +124,7 @@ const StudentForm = ({
         <InputField
           label="Email"
           name="email"
+          className="text-black"
           defaultValue={data?.email}
           register={register}
           error={errors?.email}
@@ -131,6 +133,7 @@ const StudentForm = ({
           label="Password"
           name="password"
           type="password"
+          className="text-black"
           defaultValue={data?.password}
           register={register}
           error={errors?.password}
@@ -176,6 +179,7 @@ const StudentForm = ({
         <InputField
           label="First Name"
           name="name"
+          className="text-black"
           defaultValue={data?.name}
           register={register}
           error={errors.name}
@@ -183,6 +187,7 @@ const StudentForm = ({
         <InputField
           label="Last Name"
           name="surname"
+          className="text-black"
           defaultValue={data?.surname}
           register={register}
           error={errors.surname}
@@ -190,6 +195,7 @@ const StudentForm = ({
         <InputField
           label="Phone"
           name="phone"
+          className="text-black"
           defaultValue={data?.phone}
           register={register}
           error={errors.phone}
@@ -197,6 +203,7 @@ const StudentForm = ({
         <InputField
           label="Address"
           name="address"
+          className="text-black"
           defaultValue={data?.address}
           register={register}
           error={errors.address}
@@ -204,7 +211,7 @@ const StudentForm = ({
          <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500">Blood Type</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             {...register("bloodType")}
             defaultValue={data?.bloodType || ""}
           >
@@ -227,6 +234,7 @@ const StudentForm = ({
         <InputField
           label="Birthday"
           name="birthday"
+          className="text-black"
           defaultValue={data?.birthday ? data.birthday.toISOString().split("T")[0] : ""}
           register={register}
           error={errors.birthday}
@@ -235,6 +243,7 @@ const StudentForm = ({
         <InputField
           label="Parent Id"
           name="parentId"
+          className="text-black"
           defaultValue={data?.parentId}
           register={register}
           error={errors.parentId}
@@ -243,6 +252,7 @@ const StudentForm = ({
           <InputField
             label="Id"
             name="id"
+            className="text-black"
             defaultValue={data?.id}
             register={register}
             error={errors?.id}
@@ -252,7 +262,7 @@ const StudentForm = ({
         <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500">Sex</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             {...register("sex")}
             defaultValue={data?.sex || "MALE"}
           >
@@ -269,7 +279,7 @@ const StudentForm = ({
         <div className="flex flex-col gap-2 w-full md:w-1/4">
           <label className="text-xs text-gray-500">Course</label>
           <select
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
             {...register("courseId")}
             defaultValue={data?.courseId || ""}
           >
@@ -290,7 +300,7 @@ const StudentForm = ({
         <div className="flex flex-col gap-2 w-full md:w-1/4">
         <label className="text-xs text-gray-500">Semester</label>
         <select
-          className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full"
+          className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
           {...register("currentSemesterId")}
           defaultValue={data?.currentSemesterId?.toString() || ""}
           disabled={!selectedCourseId} // Disable if no course selected
@@ -319,7 +329,7 @@ const StudentForm = ({
       )}
       
       {/* Submit button */}
-      <button className="bg-blue-400 text-white p-2 rounded-md">
+      <button className="bg-[#40e0d0] text-gray-900 p-2 rounded-md">
         {type === "create" ? "Create" : "Update"}
       </button>
     </form>

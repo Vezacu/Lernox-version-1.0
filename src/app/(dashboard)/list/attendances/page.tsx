@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs/server";
 import { format, getDaysInMonth } from "date-fns";
 import AttendanceFilters from "@/components/AttendanceFilters";
 import FormModal from "@/components/FormModal";
+import '@/components/cssfile/menuPages.css';
 
 // This component fetches data and renders the attendance page
 const AttendancesPage = async ({
@@ -284,10 +285,10 @@ const AttendancesPage = async ({
   };
 
   return (
-    <div className="bg-white p-4 md:p-6 rounded-md shadow-sm m-4 mt-0 flex-1">
+    <div className="bg-white p-4 md:p-6 rounded-md shadow-sm m-4 mt-0 flex-1 attendancepage">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
-        <h1 className="text-lg font-semibold text-gray-800">Attendance Management</h1>
+        <h1 className="text-lg font-semibold ">Attendance Management</h1>
         <div className="flex items-center gap-4">
           {(role === "admin" || role === "teacher") && searchParams.lessonId && (
             <FormModal 
@@ -307,8 +308,8 @@ const AttendancesPage = async ({
       />
 
       {/* Context information */}
-      <div className="mb-4 p-4 bg-gray-50 rounded-md">
-        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600">
+      <div className="mb-4 p-4 bg-gray-50 rounded-md attendanceSellectedMonthbg ">
+        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600 attendanceSellectedMonth ">
           <div className="flex items-center">
             <span className="font-medium mr-2">Selected Month:</span>
             <span>{format(selectedDate, 'MMMM yyyy')}</span>
@@ -355,11 +356,11 @@ const AttendancesPage = async ({
             <table className="w-full border-collapse">
               <thead>
                 <tr>
-                  <th className="bg-gray-200 border p-2 sticky left-0 z-10 min-w-[200px]">Student</th>
+                  <th className="bg-gray-200 border p-2 sticky left-0 z-10 min-w-[200px] tableStudent">Student</th>
                   {displayDates.map(date => (
                     <th 
                       key={date.getTime()} 
-                      className={`${getDateCellColor(date)} border p-2 text-center w-12`}
+                      className={`${getDateCellColor(date)} border p-2 text-center w-12 attendanceabl`}
                     >
                       <div>{formatDateDisplay(date)}</div>
                       <div className="text-xs">{getDayName(date)}</div>
@@ -369,8 +370,8 @@ const AttendancesPage = async ({
               </thead>
               <tbody>
                 {filteredStudents.map(student => (
-                  <tr key={student.id} className="hover:bg-gray-50">
-                    <td className="border p-2 font-medium sticky left-0 bg-white z-10">
+                  <tr key={student.id} className="hover:bg-gray-100 darkHover">
+                    <td className="border p-2 font-medium sticky left-0 bg-white z-10 attendancetable">
                       {student.surname}, {student.name}
                     </td>
                     {displayDates.map(date => {
@@ -382,7 +383,7 @@ const AttendancesPage = async ({
                       return (
                         <td 
                           key={dateStr} 
-                          className={`border p-2 text-center ${
+                          className={`border p-2 text-center attendancetablelist${
                             isWeekendClass ? 'bg-gray-100' : ''
                           }`}
                         >

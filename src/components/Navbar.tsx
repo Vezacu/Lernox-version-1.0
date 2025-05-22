@@ -12,8 +12,7 @@ const Navbar = () => {
     <div className="flex items-center justify-between p-4">
       <div className="logo"></div>
       <span
-        className="hidden lg:block logoName text-black text-l pr-4"
-        style={{ fontFamily: '"Press Start 2P", serif' }}
+        className="hidden lg:block logoName text-black text-l pl-2 pr-4 "
       >
         Lernox
       </span>
@@ -28,7 +27,7 @@ const Navbar = () => {
       </div>
       {/* ICONS AND USER */}
       <div className="flex items-center gap-6 justify-end w-full">
-        <div className="bg-[#08FF08] rounded-full w-7 h-7 flex items-center justify-center cursor-pointer">
+        { /*<div className="bg-[#08FF08] rounded-full w-7 h-7 flex items-center justify-center cursor-pointer">
           <Image src="/message.png" alt="" width={20} height={20} />
         </div>
         <div className="bg-[#08FF08] rounded-full w-7 h-7 flex items-center justify-center cursor-pointer relative">
@@ -36,10 +35,10 @@ const Navbar = () => {
           <div className="absolute -top-3 -right-3 w-5 h-5 flex items-center justify-center bg-black text-white rounded-full text-xs dark:bg-white dark:text-black">
             1
           </div>
-        </div>
+        </div>*/}
         <div className="flex flex-col">
-          <span className="text-xs leading-3 font-medium">John Doe</span>
-          <span className="text-[10px] text-gray-500 text-right">
+          <span className="text-xs leading-3 font-medium"></span>
+          <span className="text-[15px] text-gray-500 text-right">
             {user?.publicMetadata?.role as string}
           </span>
         </div>

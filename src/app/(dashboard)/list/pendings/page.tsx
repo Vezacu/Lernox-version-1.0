@@ -8,6 +8,7 @@ import { ITEM_PER_PAGE } from "@/lib/settings";
 import { PaymentStatus } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import '@/components/cssfile/menuPages.css'; 
 
 // Define the courses locally (same as in AdmissionPage)
 const courses = [
@@ -63,7 +64,7 @@ const PendingPaymentsPage = async ({ searchParams }: { searchParams: { [key: str
     console.log("Course Found:", course); // Debugging
 
     return (
-      <tr key={item.id} className="border-b border-gray-200 hover:bg-gray-100/50 transition-colors">
+      <tr key={item.id} className="border-b text-sm border-gray-200 hover:bg-[#a8edea] darkHoverList ">
         <td className="p-1">{item.admission.studentName}</td>
         <td className="p-1">{item.admission.studentSurname}</td>
         <td className="p-1">{course ? course.name : "N/A"}</td>
@@ -96,8 +97,8 @@ const PendingPaymentsPage = async ({ searchParams }: { searchParams: { [key: str
   const totalPages = Math.ceil(totalPayments / ITEM_PER_PAGE);
 
   return (
-    <div className="min-h-screen p-6" style={{ backgroundColor: "rgba(255, 255, 255, 0.5)" }}>
-      <div className="bg-white/70 backdrop-blur-lg rounded-lg shadow-2xl p-6">
+     <div className="min-h-screen p-6 pendingpage">
+      <div className="bg-white/70 backdrop-blur-lg rounded-lg shadow-2xl p-6 pendingpage2">
        <h1 className="text-2xl font-bold mb-6">
   {status === "verified" ? "Verified Payments" : "Pending Payments"}
 </h1>

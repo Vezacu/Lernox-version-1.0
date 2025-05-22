@@ -32,7 +32,7 @@ const InteractiveRow = ({ item, role, actions, href }: InteractiveRowProps) => {
 
   return (
     <tr 
-      className="border-b border-gray-200 hover:bg-gray-50 cursor-pointer" 
+      className="border-b border-gray-200 text-sm hover:bg-[#a8edea] darkHoverList" 
       onClick={handleRowClick}
     >
       <td className="py-3 px-0">{item.title}</td>

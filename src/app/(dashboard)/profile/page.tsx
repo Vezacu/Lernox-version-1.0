@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-
+import '@/components/cssfile/menuPages.css';
 const ProfilePage = async () => {
   // Get current user and role from Clerk
   const user = await currentUser();
@@ -177,24 +177,24 @@ const ProfilePage = async () => {
   };
 
   return (
-    <div className="flex-1 p-6 bg-gray-50">
+    <div className="flex-1 p-6 bg-gray-50 profilepage">
       {/* Main Content Container */}
       <div className="max-w-5xl mx-auto">
         {/* Profile Header Card */}
-        <div className="bg-white rounded-2xl shadow-sm p-8 mb-6">
+        <div className="bg-white rounded-2xl shadow-sm p-8 mb-6 profilecard">
           <div className="flex flex-col md:flex-row items-center gap-8">
             {/* Profile Image */}
             <div className="relative">
-              <div className="w-40 h-40 rounded-2xl overflow-hidden bg-gray-100 ring-4 ring-gray-50">
+              <div className="w-40 h-40 rounded-2xl overflow-hidden ">
                 <Image 
                   src={profileData.img} 
                   alt="Profile Picture" 
                   width={160} 
                   height={160} 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full  object-cover"
                 />
               </div>
-              <span className="absolute bottom-2 right-2 bg-green-500 p-1.5 rounded-full ring-4 ring-white">
+              <span className="absolute bottom-2 right-2 bg-green-500 p-1.5 rounded-full ring-4 ring-white ">
                 <div className="w-3 h-3 rounded-full bg-white"></div>
               </span>
             </div>
@@ -219,33 +219,39 @@ const ProfilePage = async () => {
         {/* Info Cards Grid */}
         <div className="grid md:grid-cols-2 gap-6">
           {/* Personal Information Card */}
-          <div className="bg-white rounded-2xl shadow-sm p-8">
+          <div className=" rounded-2xl shadow-sm p-8 profilecard">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 bg-blue-50 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-blue-600">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                </svg>
+                 <div className="w-5 h-5">
+      <Image
+        src="/profile.png"
+        alt="Profile"
+        width={20}
+        height={20}
+        className="rounded-full object-cover"
+      />
+    </div>
               </div>
               <h2 className="text-xl font-semibold">Personal Information</h2>
             </div>
             <div className="space-y-6">
               <div>
-                <h3 className="text-sm font-medium text-gray-500 mb-1">Full Name</h3>
-                <p className="text-gray-900">{profileData.name} {profileData.surname}</p>
+                <h3 className="text-sm font-medium  mb-1">Full Name</h3>
+                <p className="text-gray-500">{profileData.name} {profileData.surname}</p>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-500 mb-1">Role</h3>
-                <p className="text-gray-900 capitalize">{profileData.role}</p>
+                <h3 className="text-sm font-medium  mb-1">Role</h3>
+                <p className="text-gray-500 capitalize">{profileData.role}</p>
               </div>
               {profileData.gender && (
                 <div>
-                  <h3 className="text-sm font-medium text-gray-500 mb-1">Gender</h3>
-                  <p className="text-gray-900">{formatGender(profileData.gender)}</p>
+                  <h3 className="text-sm font-medium  mb-1">Gender</h3>
+                  <p className="text-gray-500">{formatGender(profileData.gender)}</p>
                 </div>
               )}
               <div>
-                <h3 className="text-sm font-medium text-gray-500 mb-1">Member Since</h3>
-                <p className="text-gray-900">
+                <h3 className="text-sm font-medium  mb-1">Member Since</h3>
+                <p className="text-gray-500">
                   {profileData.joinDate 
                     ? new Date(profileData.joinDate).toLocaleDateString('en-US', {
                         year: 'numeric', 
@@ -259,20 +265,26 @@ const ProfilePage = async () => {
           </div>
 
           {/* Contact Information Card */}
-          <div className="bg-white rounded-2xl shadow-sm p-8">
+          <div className=" rounded-2xl shadow-sm p-8 profilecard">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 bg-blue-50 rounded-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-blue-600">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                </svg>
+                 <div className="w-5 h-5">
+      <Image
+        src="/contact.png"
+        alt="Profile"
+        width={20}
+        height={20}
+        className="rounded-full object-cover"
+      />
+    </div>
               </div>
               <h2 className="text-xl font-semibold">Contact Information</h2>
             </div>
             <div className="space-y-6">
               <div>
-                <h3 className="text-sm font-medium text-gray-500 mb-1">Email Address</h3>
+                <h3 className="text-sm font-medium  mb-1">Email Address</h3>
                 <div className="flex items-center">
-                  <p className="text-gray-900">
+                  <p className="text-gray-500">
                     {profileData.email || "Not provided"}
                   </p>
                   {profileData.email && (
@@ -285,13 +297,13 @@ const ProfilePage = async () => {
                 </div>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-500 mb-1">Phone Number</h3>
+                <h3 className="text-sm font-medium  mb-1">Phone Number</h3>
                 <div className="flex items-center">
-                  <p className="text-gray-900">
+                  <p className="text-gray-500">
                     {profileData.phone || "Not provided"}
                   </p>
                   {profileData.phone && (
-                    <a href={`tel:${profileData.phone}`} className="ml-2 text-blue-500 hover:text-blue-700">
+                    <a href={`tel:${profileData.phone}`} className="ml-2  hover:text-blue-700">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
                       </svg>
@@ -300,8 +312,8 @@ const ProfilePage = async () => {
                 </div>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-500 mb-1">Address</h3>
-                <p className="text-gray-900">
+                <h3 className="text-sm font-medium  mb-1">Address</h3>
+                <p className="text-gray-500">
                   {profileData.address || "Not provided"}
                 </p>
               </div>
