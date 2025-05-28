@@ -252,7 +252,7 @@ const TeacherPage = async () => {
                 .map(lesson => (
                   <div 
                     key={lesson.id} 
-                    className="p-3 border border-green-200 rounded-md bg-green-50"
+                    className="p-3 border border-green-200 rounded-md bg-green-50 teacherspage"
                   >
                     <div className="flex justify-between items-start">
                       <div>

@@ -32,15 +32,24 @@ interface Subject {
   code: string;
 }
 
+// Updated interface to better handle attendance data structure
+interface AttendanceData {
+  studentId: string;
+  subjectId?: number;
+  totalLessons?: number;
+  attendedLessons?: number;
+  percentage?: number;
+  _count?: {
+    id: number;
+    present: number;
+  };
+}
+
 interface Props {
   students: Student[];
   existingResults?: Result[];
   subjectId: number;
-  attendance: {
-    studentId: string;
-    subjectId: number;  // Add subjectId to track per-subject attendance
-    percentage: number;
-  }[];
+  attendance: AttendanceData[];
   onClose?: () => void;
   subjects?: Subject[];
 }
@@ -77,12 +86,53 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
 
   const [loading, setLoading] = useState(false);
   const [enrolledSubjects, setEnrolledSubjects] = useState<Subject[]>([]);
-  const [attendanceData, setAttendanceData] = useState<{
-    [key: number]: {
-      percentage: number;
-      score: number;
-    };
-  }>({});
+  const [attendanceData, setAttendanceData] = useState<{ [key: string]: { percentage: number; score: number } }>({});
+
+  // Process attendance data from props
+  const processAttendanceData = (studentId: string, attendanceList: AttendanceData[], enrolledSubjects: Subject[]) => {
+    debug('Processing attendance data', { attendanceList, studentId });
+    
+    const processedAttendance: { [key: string]: { percentage: number; score: number } } = {};
+    
+    // Process each subject's attendance
+    enrolledSubjects.forEach(subject => {
+      const subjKey = String(subject.id);
+      
+      // Find matching attendance record
+      const attendanceRecord = attendanceList.find(record => 
+        record.subjectId === subject.id
+      );
+      
+      debug(`Processing subject ${subject.name} (ID: ${subjKey})`, attendanceRecord);
+
+      if (attendanceRecord) {
+        let percentage = 0;
+        
+        if ('percentage' in attendanceRecord) {
+          percentage = attendanceRecord.percentage || 0;
+        } else if ('totalLessons' in attendanceRecord && 'attendedLessons' in attendanceRecord) {
+          const total = attendanceRecord.totalLessons || 0;
+          const attended = attendanceRecord.attendedLessons || 0;
+          percentage = total > 0 
+            ? Math.round((attended / total) * 100)
+            : 0;
+        }
+
+        processedAttendance[subjKey] = {
+          percentage: percentage,
+          score: calculateAttendanceScore(percentage)
+        };
+
+        debug(`Calculated attendance for ${subject.name}:`, processedAttendance[subjKey]);
+      } else {
+        processedAttendance[subjKey] = { percentage: 0, score: 0 };
+        debug(`No attendance record found for ${subject.name}`);
+      }
+    });
+
+    debug('Final processed attendance:', processedAttendance);
+    return processedAttendance;
+  };
 
   // Initialize form with enrolled subjects and existing results
   useEffect(() => {
@@ -111,22 +161,16 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
         // Then fetch attendance data
         const attendanceRes = await fetch(`/api/students/${studentId}/attendance`);
         const attendanceData = await attendanceRes.json();
+        debug('Raw attendance data received:', attendanceData);
 
         // Process attendance data
-        const processedAttendance: { [key: number]: { percentage: number; score: number } } = {};
-        attendanceData.attendance?.forEach((att: any) => {
-          const percentage = att.totalLessons > 0 
-            ? (att.attendedLessons / att.totalLessons) * 100 
-            : 0;
-          
-          processedAttendance[att.subjectId] = {
-            percentage: percentage,
-            score: calculateAttendanceScore(percentage)
-          };
-        });
-
+        const processedAttendance = processAttendanceData(
+          studentId,
+          Array.isArray(attendanceData) ? attendanceData : [], // Ensure we're passing an array
+          subjectsData.subjects
+        );
         debug('Processed attendance data', processedAttendance);
-
+        
         setAttendanceData(processedAttendance);
 
         // Initialize results while preserving existing values
@@ -137,7 +181,12 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
         subjectsData.subjects.forEach((subject: Subject) => {
           const existingResult = existingResults.find(r => r.subjectId === subject.id);
           const savedResult = parsedSavedResults[subject.id];
-          const subjectAttendanceData = processedAttendance[subject.id] || { percentage: 0, score: 0 };
+          
+          // Get attendance data for this subject, default to 0 if not found
+          const subjectAttendanceData = processedAttendance[subject.id] || { 
+            percentage: 0, 
+            score: 0 
+          };
 
           initialResults[subject.id] = {
             internal: savedResult?.internal || existingResult?.internal?.toString() || '',
@@ -161,8 +210,15 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
       }
     };
 
+    // Process attendance data from props if available
+    if (attendance && attendance.length > 0 && enrolledSubjects.length > 0) {
+      debug('Using attendance data from props', attendance);
+      const processedAttendance = processAttendanceData(studentId, attendance, enrolledSubjects);
+      setAttendanceData(processedAttendance);
+    }
+
     fetchEnrolledSubjects();
-  }, [studentId, existingResults, storageKey]); // Remove unnecessary dependencies
+  }, [studentId, existingResults, storageKey, attendance]); // Added attendance as dependency
 
   const calculateAttendanceScore = (percentage: number): number => {
     // More precise calculation with rounding to nearest 0.5
@@ -343,8 +399,10 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
                 </tr>
               </thead>
               <tbody className="max-h-[600px] overflow-y-auto">
-                {enrolledSubjects.map(subject => {
-                  const subjectAttendanceData = attendanceData[subject.id] || { percentage: 0, score: 0 };
+                {enrolledSubjects.map((subject: Subject) => {
+                  const subjKey = String(subject.id);
+                  const subjectAttendanceData = attendanceData[subjKey] || { percentage: 0, score: 0 };
+
                   const studentScores = results[subject.id] || {
                     internal: '',
                     external: '',
@@ -357,7 +415,7 @@ const ResultForm = ({ students, existingResults = [], subjectId, attendance, sub
                     subjectAttendanceData.score;
 
                   return (
-                    <tr key={subject.id} className="hover:bg-gray-30 ">
+                    <tr key={subjKey} className="hover:bg-gray-30">
                       <td className="p-2 border">{subject.name}</td>
                       <td className="p-2 border">
                         <input
