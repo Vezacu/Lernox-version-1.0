@@ -90,7 +90,7 @@ const StudentLessonsDisplay = async ({
 
   return (
     <div>
-      <h2 className="text-lg font-semibold text-gray-800 mb-4">My Class Schedule</h2>
+      <h2 className="text-lg font-semibold text-gray-500 mb-4">My Class Schedule</h2>
       
       {/* Timetable view */}
       <div className="overflow-x-auto">

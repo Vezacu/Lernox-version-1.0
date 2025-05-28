@@ -10,6 +10,42 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { createLesson, updateLesson } from "@/lib/actions";
 
+// Generate time options from 9 AM to 4 PM at 1-hour intervals with 12-hour display format
+const generateTimeOptions = () => {
+  // Array to hold time values in 24-hour format (for form submission)
+  const timeValues: string[] = [];
+  // Array to hold time labels in 12-hour format (for display)
+  const timeLabels: string[] = [];
+  
+  for (let hour = 9; hour <= 16; hour++) {
+    // Format 24-hour time value (e.g., "09:00")
+    const hourStr = hour.toString().padStart(2, '0');
+    const timeValue = `${hourStr}:00`;
+    timeValues.push(timeValue);
+    
+    // Format 12-hour time label (e.g., "9 AM")
+    let displayHour = hour;
+    let period = "AM";
+    
+    if (hour >= 12) {
+      period = "PM";
+      if (hour > 12) {
+        displayHour = hour - 12;
+      }
+    }
+    
+    timeLabels.push(`${displayHour} ${period}`);
+  }
+  
+  // Return an array of objects with value and label properties
+  return timeValues.map((value, index) => ({
+    value,
+    label: timeLabels[index]
+  }));
+};
+
+const TIME_OPTIONS = generateTimeOptions();
+
 // Simplified schema for better UX
 const createLessonSchema = z.object({
   day: z.enum(["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"], {
@@ -100,8 +136,8 @@ const LessonForm = ({
       courseId: 0,
       semesterId: 0,
       subjectOfferingId: 0,
-      startTime: "09:00",
-      endTime: "10:00"
+      startTime: "09:00", // Default to 9 AM
+      endTime: "10:00"    // Default to 10 AM (1 hour class)
     }
   });
   
@@ -119,8 +155,8 @@ const LessonForm = ({
           courseId: 0,
           semesterId: 0,
           subjectOfferingId: 0,
-          startTime: "09:00",
-          endTime: "10:00",
+          startTime: "09:00", // Default to 9 AM
+          endTime: "10:00",   // Default to 10 AM (1 hour class)
           status: "SCHEDULED"
         }
   });
@@ -142,9 +178,14 @@ const LessonForm = ({
     ? watchCreate("semesterId")
     : watchUpdate("semesterId");
   
+  const selectedStartTime = type === "create"
+    ? watchCreate("startTime")
+    : watchUpdate("startTime");
+  
   // State for filtered data
   const [filteredSemesters, setFilteredSemesters] = useState<any[]>([]);
   const [filteredSubjectOfferings, setFilteredSubjectOfferings] = useState<any[]>([]);
+  const [endTimeOptions, setEndTimeOptions] = useState<any[]>([]);
 
   // Initialize update form with data - now correctly using getUpdateFormDefaults in dependencies
   useEffect(() => {
@@ -185,6 +226,25 @@ const LessonForm = ({
     }
   }, [selectedSemester, subjectOfferings]);
   
+  // Update end time options based on selected start time
+  useEffect(() => {
+    if (selectedStartTime) {
+      // Find the index of the selected start time
+      const startIndex = TIME_OPTIONS.findIndex(option => option.value === selectedStartTime);
+      
+      if (startIndex >= 0 && startIndex < TIME_OPTIONS.length - 1) {
+        // Get valid end time options (all times after the selected start time)
+        const validEndOptions = TIME_OPTIONS.slice(startIndex + 1);
+        setEndTimeOptions(validEndOptions);
+        
+        // Auto-select the next hour as the end time (1 hour after start)
+        if (type === "create" && validEndOptions.length > 0) {
+          setValueCreate("endTime", validEndOptions[0].value);
+        }
+      }
+    }
+  }, [selectedStartTime, setValueCreate, type]);
+  
   // Handle form success/error
   useEffect(() => {
     if (state.success) {
@@ -204,57 +264,13 @@ const LessonForm = ({
     }
   }, [state, type, setOpen, router]);
   
-  // Validate time inputs
-  const validateTimeInputs = () => {
-    const startTime = type === "create" ? watchCreate("startTime") : watchUpdate("startTime");
-    const endTime = type === "create" ? watchCreate("endTime") : watchUpdate("endTime");
-    
-    if (!startTime || !endTime) return true; // Let the form validation handle empty fields
-    
-    const start = new Date(`1970-01-01T${startTime}`);
-    const end = new Date(`1970-01-01T${endTime}`);
-    
-    if (end <= start) {
-      toast.error("End time must be after start time");
-      return false;
-    }
-    
-    return true;
-  };
-
-  // Calculate end time (1 hour after start time)
-  const calculateEndTime = (startTime: string) => {
-    const [hours, minutes] = startTime.split(":").map(Number);
-    const date = new Date();
-    date.setHours(hours, minutes);
-    date.setHours(date.getHours() + 1);
-    
-    return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
-  };
-
-  // Handle start time change to auto-adjust end time
-  const handleStartTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newStartTime = e.target.value;
-    const newEndTime = calculateEndTime(newStartTime);
-    
-    if (type === "create") {
-      setValueCreate("startTime", newStartTime);
-      setValueCreate("endTime", newEndTime);
-    } else {
-      setValueUpdate("startTime", newStartTime);
-      setValueUpdate("endTime", newEndTime);
-    }
-  };
-
-  // Different form handlers for create and update with validation
+  // Different form handlers for create and update
   const onSubmitCreate = handleSubmitCreate((data) => {
-    if (!validateTimeInputs()) return;
     console.log("Creating lesson with data:", data);
     formAction(data);
   });
   
   const onSubmitUpdate = handleSubmitUpdate((data) => {
-    if (!validateTimeInputs()) return;
     console.log("Updating lesson with data:", data);
     formAction(data);
   });
@@ -396,40 +412,59 @@ const LessonForm = ({
         )}
       </div>
       
-      {/* Time Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Start Time */}
-        <div className="flex flex-col gap-2 w-full">
-          <label className="text-xs text-gray-400">Start Time</label>
-          <input
-            type="time"
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
-            {...(type === "create" ? registerCreate("startTime") : registerUpdate("startTime"))}
-            onChange={handleStartTimeChange}
-          />
-          {(type === "create" ? errorsCreate.startTime : errorsUpdate.startTime) && (
-            <p className="text-xs text-red-400">
-              {(type === "create" ? errorsCreate.startTime?.message : errorsUpdate.startTime?.message) || "Start time is required"}
-            </p>
-          )}
+      {/* Time Section - Only show in create mode */}
+      {type === "create" ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Start Time */}
+          <div className="flex flex-col gap-2 w-full">
+            <label className="text-xs text-gray-400">Start Time</label>
+            <select
+              className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
+              {...registerCreate("startTime")}
+            >
+              {TIME_OPTIONS.map(option => (
+                <option key={`start-${option.value}`} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            {errorsCreate.startTime && (
+              <p className="text-xs text-red-400">
+                {errorsCreate.startTime?.message || "Start time is required"}
+              </p>
+            )}
+            <p className="text-xs text-gray-500 mt-1">Class hours: 9 AM - 4 PM</p>
+          </div>
+          
+          {/* End Time */}
+          <div className="flex flex-col gap-2 w-full">
+            <label className="text-xs text-gray-400">End Time</label>
+            <select
+              className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
+              {...registerCreate("endTime")}
+              disabled={!selectedStartTime}
+            >
+              {endTimeOptions.map(option => (
+                <option key={`end-${option.value}`} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+            {errorsCreate.endTime && (
+              <p className="text-xs text-red-400">
+                {errorsCreate.endTime?.message || "End time is required"}
+              </p>
+            )}
+            <p className="text-xs text-gray-500 mt-1">End time must be after start time and no later than 4 PM</p>
+          </div>
         </div>
-        
-        {/* End Time */}
-        <div className="flex flex-col gap-2 w-full">
-          <label className="text-xs text-gray-400">End Time</label>
-          <input
-            type="time"
-            className="ring-[1.5px] ring-gray-300 p-2 rounded-md text-sm w-full text-black"
-            {...(type === "create" ? registerCreate("endTime") : registerUpdate("endTime"))}
-          />
-          {(type === "create" ? errorsCreate.endTime : errorsUpdate.endTime) && (
-            <p className="text-xs text-red-400">
-              {(type === "create" ? errorsCreate.endTime?.message : errorsUpdate.endTime?.message) || "End time is required"}
-            </p>
-          )}
-          <p className="text-xs text-gray-500 mt-1">End time must be after start time</p>
-        </div>
-      </div>
+      ) : (
+        <>
+          {/* Hidden time inputs for update mode */}
+          <input type="hidden" {...registerUpdate("startTime")} />
+          <input type="hidden" {...registerUpdate("endTime")} />
+        </>
+      )}
       
       {/* Error message with improved feedback */}
       {state.error && (

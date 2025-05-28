@@ -75,7 +75,6 @@ const Announcements = async () => {
   }
 
   const data = await prisma.announcement.findMany({
-    take: 3,
     orderBy: { date: "desc" },
     where: whereCondition,
     include: {
@@ -85,11 +84,11 @@ const Announcements = async () => {
   });
 
   return (
-    <div className="bg-white p-4 rounded-md Announcementbg">
+    <div className="bg-white p-4 rounded-md overflow-scroll Announcementbg">
       <div className="flex items-center justify-between">
         <h1 className="font-semibold">Announcements</h1>
       </div>
-      <div className="mt-4 flex flex-col gap-4">
+      <div className="mt-4 flex flex-col gap-4 max-h-80 overflow-y-scroll pr-2">
         {data.map((announcement) => (
           <div 
             key={announcement.id}

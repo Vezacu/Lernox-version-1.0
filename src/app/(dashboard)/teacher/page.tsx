@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import { format } from "date-fns";
 import { LessonStatus } from "@prisma/client";
 import React from "react";
+import '@/components/cssfile/menuPages.css';
 
 const daysOrder = ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"];
 
@@ -65,7 +66,7 @@ const TeacherPage = async () => {
     ]
   });
 
-  // Group lessons by day for timetable view
+  // Group lessons by day for timetable view 
   const timetable = daysOrder.map(day => ({
     day,
     periods: lessons.filter(lesson => lesson.day === day)
@@ -107,17 +108,17 @@ const TeacherPage = async () => {
   const endHour = 16;
 
   return (
-    <div className="flex-1 p-4 flex gap-4 flex-col xl:flex-row">
+    <div className="flex-1 p-4 flex gap-4 flex-col xl:flex-row ">
       {/* LEFT - Teacher Schedule */}
-      <div className="w-full xl:w-2/3 flex flex-col gap-6">
-        <div className="w-full bg-white p-4 rounded-md shadow-sm">
-          <h1 className="text-xl font-semibold mb-4">
+      <div className="w-full xl:w-2/3 flex flex-col gap-6 ">
+        <div className="w-full bg-white p-4 rounded-md shadow-sm teacherspage">
+          <h1 className="text-xl font-semibold  mb-4 ">
             {teacher.name} {teacher.surname}&apos;s Teaching Schedule
           </h1>
           
           {lessons.length > 0 ? (
             <div>
-              <h2 className="text-lg font-semibold text-gray-800 mb-4">My Class Schedule</h2>
+              <h2 className="text-lg font-semibold text-gray-500 mb-4">My Class Schedule</h2>
               
               {/* Timetable view */}
               <div className="overflow-x-auto">
@@ -189,15 +190,15 @@ const TeacherPage = async () => {
               </div>
             </div>
           ) : (
-            <div className="text-center text-gray-500 py-8">
+            <div className="text-center text-gray-500 py-8 ">
               No lessons assigned yet. Please wait for admin to assign your teaching schedule.
             </div>
           )}
         </div>
 
         {/* Additional section for upcoming lessons */}
-        <div className="w-full bg-white p-4 rounded-md shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Upcoming Lessons</h2>
+        <div className="w-full bg-white p-4 rounded-md shadow-sm teacherspage" >
+          <h2 className="text-lg font-semibold  mb-4">Upcoming Lessons</h2>
           
           {lessons.length > 0 ? (
             <div className="space-y-3">
@@ -207,15 +208,15 @@ const TeacherPage = async () => {
                 .map(lesson => (
                   <div 
                     key={lesson.id} 
-                    className="p-3 border rounded-md hover:bg-gray-50 transition-colors"
+                    className="p-3 border rounded-md "
                   >
                     <div className="flex justify-between items-start">
                       <div>
                         <div className="font-medium">{lesson.subjectOffering.subject.name}</div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-gray-500">
                           {format(lesson.startTime, 'EEEE, MMMM d, yyyy')} • {formatTime(lesson.startTime)} - {formatTime(lesson.endTime)}
                         </div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-gray-500">
                           Semester {lesson.subjectOffering.semester.number}
                         </div>
                       </div>
@@ -240,8 +241,8 @@ const TeacherPage = async () => {
         </div>
 
         {/* Recent lesson completions */}
-        <div className="w-full bg-white p-4 rounded-md shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Recently Completed Lessons</h2>
+        <div className="w-full bg-white p-4 rounded-md shadow-sm teacherspage">
+          <h2 className="text-lg font-semibold mb-4 ">Recently Completed Lessons</h2>
           
           {lessons.length > 0 ? (
             <div className="space-y-3">
@@ -256,7 +257,7 @@ const TeacherPage = async () => {
                     <div className="flex justify-between items-start">
                       <div>
                         <div className="font-medium">{lesson.subjectOffering.subject.name}</div>
-                        <div className="text-sm text-gray-600">
+                        <div className="text-sm text-gray-500">
                           {format(lesson.startTime, 'EEEE, MMMM d, yyyy')} • {formatTime(lesson.startTime)} - {formatTime(lesson.endTime)}
                         </div>
                       </div>
@@ -284,13 +285,13 @@ const TeacherPage = async () => {
       {/* RIGHT - Announcements and Summary */}
       <div className="w-full xl:w-1/3 flex flex-col gap-6">
         {/* Announcements */}
-        <div className="w-full bg-white p-4 rounded-md shadow-sm">
+        <div className="w-full bg-white p-4 rounded-md shadow-sm announcementpage">
           <Announcements />
         </div>
 
         {/* Teaching Summary */}
-        <div className="w-full bg-white p-4 rounded-md shadow-sm">
-          <h2 className="text-lg font-semibold text-gray-800 mb-4">Teaching Summary</h2>
+        <div className="w-full bg-white p-4 rounded-md shadow-sm announcementpage">
+          <h2 className="text-lg font-semibold  mb-4">Teaching Summary</h2>
           
           <div className="space-y-3">
             <div className="flex justify-between items-center p-2 border-b">

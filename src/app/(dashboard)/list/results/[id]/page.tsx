@@ -169,11 +169,11 @@ export default async function StudentResultPage({ params }: PageProps) {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                       {result.attendance}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600">
                       {result.total}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
+                      <span className={`inline-flex items-center px-3 py-1 text-gray-900 rounded-full text-xs font-medium ${
                         result.total >= 35 
                           ? 'bg-green-100 text-green-800' 
                           : 'bg-red-100 text-red-800'
