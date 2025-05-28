@@ -29,7 +29,7 @@ const AssignmentListPage = async ({
   const role = (sessionClaims?.metadata as { role?: string })?.role;
 
   // Add authorization check
-  if (!userId || !["admin", "teacher", "student"].includes(role?.toLowerCase() || "")) {
+  if (!userId || !["admin", "teacher", "student", "parent"].includes(role?.toLowerCase() || "")) {
     redirect("/sign-in");
   }
   

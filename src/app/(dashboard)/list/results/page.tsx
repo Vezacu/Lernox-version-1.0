@@ -167,7 +167,7 @@ export default async function ResultsPage({
       semesters={semesters}
       subjects={subjects}
       attendance={attendance}
-      role={role}
+      role={role} 
     />
   );
 }

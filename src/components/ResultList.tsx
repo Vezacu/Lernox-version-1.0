@@ -219,6 +219,18 @@ const ResultList = ({ data, subjects, ...props }: ResultListProps) => {
             </div>
           </td>
         )}
+         {(props.role === "parents" ) && (
+          <td className="py-4 pr-8">
+            <div className="flex items-center justify-end space-x-3">
+              <Link
+                href={`/list/results/${item.id}`}
+                className="bg-[#40e0d0] text-black px-4 py-2 rounded-md hover:bg-gray-400 transition-colors"
+              >
+                View Results
+              </Link> 
+            </div>
+          </td>
+        )}
       </tr>
     );
   };

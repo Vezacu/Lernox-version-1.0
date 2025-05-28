@@ -12,9 +12,9 @@ const Navbar = () => {
     <div className="flex items-center justify-between p-4">
       <div className="logo"></div>
       <span
-        className="hidden lg:block logoName text-black text-l pl-2 pr-4 "
+        className="hidden lg:block logoName text-black text-l pl-2 pr-4 font-bold"
       >
-        Lernox
+        LERNOX
       </span>
            {/* SEARCH BAR */}
            <div className="hidden md:flex items-center gap-2 text-xs rounded-full bg-white ring-[1.9px] ring-gray-300 px-4 flex-none flex-shrink w-[15rem]">

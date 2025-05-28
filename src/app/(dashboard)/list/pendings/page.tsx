@@ -10,15 +10,18 @@ import Image from "next/image";
 import Link from "next/link";
 import '@/components/cssfile/menuPages.css'; 
 
-// Define the courses locally (same as in AdmissionPage)
-const courses = [
-  { id: "1", name: "BCA" },
-  { id: "2", name: "MCA" },
-  { id: "3", name: "B.Tech" },
-  { id: "4", name: "M.Tech" },
-];
-
 const PendingPaymentsPage = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+  // Fetch courses from database
+  const courses = await prisma.course.findMany({
+    select: {
+      id: true,
+      name: true
+    }
+  });
+
+  // Add debug logging
+  console.log("Available courses:", courses);
+
   const { page, sort, status } = searchParams;
   const p = page ? parseInt(page) : 1;
 
@@ -59,15 +62,21 @@ const PendingPaymentsPage = async ({ searchParams }: { searchParams: { [key: str
   ];
 
   const renderRow = (item: any) => {
-    console.log("Admission Data:", item.admission); // Debugging
-    const course = courses.find(course => course.id === item.admission.courseId);
-    console.log("Course Found:", course); // Debugging
+    // Add detailed debugging
+    console.log("Payment item:", item);
+    console.log("Admission courseId:", item.admission.courseId);
+    console.log("Course ID type:", typeof item.admission.courseId);
+    
+    // Fix the comparison by converting IDs to numbers
+    const course = courses.find(course => course.id === Number(item.admission.courseId));
+    
+    console.log("Found course:", course);
 
     return (
       <tr key={item.id} className="border-b text-sm border-gray-200 hover:bg-[#a8edea] darkHoverList ">
         <td className="p-1">{item.admission.studentName}</td>
         <td className="p-1">{item.admission.studentSurname}</td>
-        <td className="p-1">{course ? course.name : "N/A"}</td>
+        <td className="p-1">{course ? course.name : `N/A (ID: ${item.admission.courseId})`}</td>
         <td className="p-1">{new Date(item.createdAt).toLocaleDateString()}</td>
         <td className="p-1">
           <span className={`px-3 py-1 rounded-full text-sm font-semibold ${

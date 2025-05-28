@@ -56,7 +56,7 @@ const [isDropdownOpen, setIsDropdownOpen] = useState(false);
          </div>
           )}
           <div className="logo-container">
-            <Image src="/foxlogo.png" alt="LERNOX Logo" width={40} height={40} />
+            <Image src="/lernoxlogo.png" alt="LERNOX Logo" width={40} height={40} />
             <span className="logo-text text-black">LERNOX</span>
           </div>
         </div>
@@ -69,7 +69,7 @@ const [isDropdownOpen, setIsDropdownOpen] = useState(false);
         <div className="h-screen flex justify-center items-center  bg-gradient-to-br from-[#f5f7fa] to-[#e9e4f0] dark:from-#c3cfe2] dark:to-[#111827]   signinbg ">
           <div className="bg-white/20 dark:bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-lg border border-white/30 dark:border-white/20 max-w-md w-full">
             <h1 className="text-3xl font-bold flex items-center gap-2  mb-4">
-              <Image src="/logo.png" alt="LERNOX" width={45} height={45} />
+              <Image src="/lernoxlogo.png" alt="LERNOX" width={45} height={45} />
               LΣRNϴX
             </h1>
             <h2 className="text-gray-800 mb-2 mt-8">Sign in to your account</h2>

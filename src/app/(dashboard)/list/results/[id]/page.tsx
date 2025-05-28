@@ -2,6 +2,7 @@ import prisma from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import '@/components/cssfile/menuPages.css';
+import { auth } from '@clerk/nextjs/server';
 
 interface PageProps {
   params: {
@@ -48,6 +49,10 @@ interface Student {
 }
 
 export default async function StudentResultPage({ params }: PageProps) {
+  // Get user role from auth
+  const { sessionClaims } = await auth();
+  const role = (sessionClaims?.metadata as { role?: string })?.role;
+  
   const student = await prisma.student.findUnique({
     where: { id: params.id },
     include: {
@@ -74,23 +79,25 @@ export default async function StudentResultPage({ params }: PageProps) {
 
   return (
     <div className="p-6 max-w-6xl mx-auto resultIDpage">
-      {/* Back Button with improved styling */}
-      <div className="mb-8">
-        <Link
-          href="/list/results"
-          className="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors shadow-sm group resultIDpage"
-        >
-          <svg 
-            className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform " 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
+      {/* Back Button with improved styling - only shown for non-student roles */}
+      {role !== 'student' && (
+        <div className="mb-8">
+          <Link
+            href="/list/results"
+            className="inline-flex items-center px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors shadow-sm group resultIDpage"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back to Results
-        </Link>
-      </div>
+            <svg 
+              className="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform " 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Results
+          </Link>
+        </div>
+      )}
 
       {/* Main Content Container */}
       <div className="space-y-8">
