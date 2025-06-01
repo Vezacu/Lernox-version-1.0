@@ -219,7 +219,7 @@ const ResultList = ({ data, subjects, ...props }: ResultListProps) => {
             </div>
           </td>
         )}
-         {(props.role === "parents" ) && (
+         {(props.role === "parent", "teacher", "admin" ) && (
           <td className="py-4 pr-8">
             <div className="flex items-center justify-end space-x-3">
               <Link
