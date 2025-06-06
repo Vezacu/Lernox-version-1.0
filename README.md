@@ -129,5 +129,8 @@ This project was developed as part of an academic submission.
 Unauthorized reproduction or distribution of this project or any part of it is strictly prohibited.
 
 ## Contact
+```bash
+Phone no. : +91 9863080890
+Email : vezacudawhuoyt@gmail.com
+```
 
--[Contact details +91 9863080890]
